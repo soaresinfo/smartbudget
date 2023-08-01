@@ -14,17 +14,17 @@
     </appender>
 
     <appender name="FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_DIR:-env/}logs/webclinica.log</file>
+        <file>${LOG_DIR:-env/}logs/smartbudget.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR:-env/}logs/webclinica.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_DIR:-env/}logs/smartbudget.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <logger name="com.soares.webclinica" level="INFO" additivity="false">
+    <logger name="com.soares.smartbudget" level="INFO" additivity="false">
         <appender-ref ref="FILE_APPENDER" />
         <appender-ref ref="STDOUT" />
     </logger>
