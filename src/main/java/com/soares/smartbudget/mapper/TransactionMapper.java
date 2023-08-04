@@ -8,6 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(uses = ExpenseMapper.class)
 public interface TransactionMapper {
 
@@ -22,4 +24,8 @@ public interface TransactionMapper {
     TransactionEntity fromCoreToEntity(Transaction core);
 
     Transaction fromEntityToCore(TransactionEntity save);
+
+    List<Transaction> fromEntityToCore(List<TransactionEntity> save);
+
+    List<TransactionResponseModel> fromCoreToModel(List<Transaction> source);
 }

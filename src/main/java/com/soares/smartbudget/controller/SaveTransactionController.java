@@ -22,7 +22,7 @@ public class SaveTransactionController {
 
     private final TransactionRequestValidator validator;
 
-    @PostMapping(path = "/transaction", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/transactions", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TransactionResponseModel> save(@RequestBody TransactionRequestModel model) {
 
         validator.validate(model).isInvalidThrow(BadRequestException.class);
