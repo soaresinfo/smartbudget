@@ -15,7 +15,7 @@ import java.util.UUID;
 public class TransactionFactory {
 
     private static final Faker FAKER = FakerFactory.getInstance();
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static TransactionRequestModel getModel(){
         return TransactionRequestModel.builder()

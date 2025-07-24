@@ -12,25 +12,16 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@Sql(scripts = {"classpath:schema.sql", "classpath:data.sql"})
+@Sql(scripts = {"classpath:data.sql"})
 public abstract class AbstractIntegrationTest {
 
     @Container
-    public static MySQLContainer container = new MySQLContainer("mysql:latest")
+    public static final MySQLContainer<?> container = new MySQLContainer<>("mysql:8.0.33")
             .withDatabaseName("budget")
             .withUsername("root")
-            .withPassword("root");
-
-    @BeforeAll
-    static void setup(){
-        container.withReuse(true);
-        container.start();
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        container.stop();
-    }
+            .withPassword("root")
+            .withInitScript("schema.sql")
+            .withReuse(true);
 
     @DynamicPropertySource
     public static void overrideProperties(DynamicPropertyRegistry registry){

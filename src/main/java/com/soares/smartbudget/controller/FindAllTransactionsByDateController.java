@@ -22,7 +22,7 @@ public class FindAllTransactionsByDateController {
 
     private final FindAllTransactionsByDateService service;
 
-    private DateValidator validator = new DateValidator("transactionDate");
+    private final DateValidator validator = new DateValidator("transactionDate");
 
     @GetMapping(path = "/transactions", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TransactionResponseModel>> findAllByDate(@RequestParam("transactionDate") String transactionDate) {
