@@ -46,17 +46,47 @@ CREATE TABLE IF NOT EXISTS `budget`.`transaction` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `budget`.`investment_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `budget`.`investment_type` (
+  `id_investment_type` BINARY(16) NOT NULL,
+  `description` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id_investment_type`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `budget`.`location`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `budget`.`location` (
+  `id_location` BINARY(16) NOT NULL,
+  `description` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id_location`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `budget`.`investment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`investment` (
   `id_investment` BINARY(16) NOT NULL,
-  `type` VARCHAR(45) NOT NULL,
-  `location` VARCHAR(45) NOT NULL,
-  `value` DECIMAL(10,2) NOT NULL,
-  `date` DATE NOT NULL,
-  PRIMARY KEY (`id_investment`))
+  `id_investment_type` BINARY(16) NOT NULL,
+  `id_location` BINARY(16) NOT NULL,
+  `balance` DECIMAL(10,2) NOT NULL,
+  `last_update_date` DATE NOT NULL,
+  PRIMARY KEY (`id_investment`),
+  INDEX `fk_investment_type_idx` (`id_investment_type` ASC) VISIBLE,
+  INDEX `fk_location_idx` (`id_location` ASC) VISIBLE,
+  CONSTRAINT `fk_investment_investment_type`
+    FOREIGN KEY (`id_investment_type`)
+    REFERENCES `budget`.`investment_type` (`id_investment_type`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_investment_location`
+    FOREIGN KEY (`id_location`)
+    REFERENCES `budget`.`location` (`id_location`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
