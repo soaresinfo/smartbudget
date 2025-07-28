@@ -21,20 +21,20 @@ public class ControllerAdviceHandler {
 
     @ExceptionHandler
     ResponseEntity<Object> handleException(final Exception ex, final WebRequest request){
-        LOGGER.error(String.format("Falha desconhecida: %s", ex.getMessage()));
+        LOGGER.error("Falha desconhecida: {}", ex.getMessage());
         ValidationResult result = ValidationResult.fail(List.of(Error.create("Erro desconhecido", ex.getMessage(), "500", null)));
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
     }
 
     @ExceptionHandler
     ResponseEntity<Object> handleException(final NotFoundException nfe, final WebRequest request){
-        LOGGER.error(String.format("Recurso não encontrado: %s", nfe.getMessage()));
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(nfe.getValidationResult());
+        LOGGER.error("Recurso não encontrado: {}", nfe.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(nfe.getValidationResult());
     }
 
     @ExceptionHandler
     ResponseEntity<Object> handleException(final BadRequestException bre, final WebRequest request){
-        LOGGER.error(String.format("Requisição incorreta: %s", bre.getMessage()));
+        LOGGER.error("Requisição incorreta: {}", bre.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getValidationResult());
     }
 }

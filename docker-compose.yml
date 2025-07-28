@@ -11,5 +11,9 @@ services:
     ports:
       - '3306:3306'
     volumes:
+      - ./config/mysql/my.cnf:/etc/mysql/conf.d/my-custom.cnf
       - ./src/test/resources/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
       - ./src/test/resources/data.sql:/docker-entrypoint-initdb.d/2_data.sql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci

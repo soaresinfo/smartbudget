@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema budget
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `budget` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `budget` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 USE `budget` ;
 
 -- -----------------------------------------------------
@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `budget`.`investment` (
   `id_investment_type` BINARY(16) NOT NULL,
   `id_location` BINARY(16) NOT NULL,
   `balance` DECIMAL(10,2) NOT NULL,
+  `month_revenue` DECIMAL(10,2) NOT NULL,
   `last_update_date` DATE NOT NULL,
   PRIMARY KEY (`id_investment`),
   INDEX `fk_investment_type_idx` (`id_investment_type` ASC) VISIBLE,

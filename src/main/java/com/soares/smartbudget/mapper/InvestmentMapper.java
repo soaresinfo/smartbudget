@@ -1,5 +1,6 @@
 package com.soares.smartbudget.mapper;
 
+import com.soares.smartbudget.controller.model.InvestmentResponseModel;
 import com.soares.smartbudget.repository.entity.InvestmentEntity;
 import com.soares.smartbudget.service.core.Investment;
 import org.mapstruct.Mapper;
@@ -13,4 +14,5 @@ public interface InvestmentMapper {
     InvestmentMapper INSTANCE = Mappers.getMapper(InvestmentMapper.class);
     Investment fromEntityToCore(InvestmentEntity entity);
     List<Investment> fromEntityToCore(List<InvestmentEntity> entities);
+    List<InvestmentResponseModel> fromCoreToModel(List<Investment> core);
 }

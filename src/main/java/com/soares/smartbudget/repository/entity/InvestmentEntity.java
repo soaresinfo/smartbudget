@@ -10,7 +10,7 @@ import org.hibernate.annotations.UuidGenerator;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -45,5 +45,5 @@ public class InvestmentEntity implements Serializable {
     private BigDecimal monthRevenue;
 
     @Column(name = "last_update_date", nullable = false, columnDefinition = "date")
-    private LocalDateTime lastUpdateDate;
+    private LocalDate lastUpdateDate;
 }

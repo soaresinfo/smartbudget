@@ -49,19 +49,19 @@ VALUES
 (UUID_TO_BIN('d5e6f1a2-b3c4-4d4e-8f5a-b6c7d8e9f0a1'), 'Opções e Derivativos');
 
 -- Inserindo investimentos de exemplo, combinando tipos e locais
-INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_investment_type`, `id_location`, `balance`, `last_update_date`)
+INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
 VALUES
 -- Investimento Conservador no Itaú
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 15000.75, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 15000.75,150.00, NOW()),
 
 -- Fundo Imobiliário no Nubank
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7500.50, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7500.50,75.00, NOW()),
 
 -- Carteira de Ações na XP
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22345.00, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22345.00,223.00, NOW()),
 
 -- Criptomoedas no BTG Pactual
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5800.20, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5800.20,58.00, NOW()),
 
 -- CDB no Bradesco
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 31000.00, NOW());
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 31000.00,310.00, NOW());

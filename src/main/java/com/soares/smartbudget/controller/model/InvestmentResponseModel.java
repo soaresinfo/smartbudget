@@ -1,13 +1,13 @@
-package com.soares.smartbudget.service.core;
+package com.soares.smartbudget.controller.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public record Investment(
+public record InvestmentResponseModel(
         UUID idInvestment,
-        InvestmentType investmentType,
-        Location location,
+        InvestmentTypeResponseModel investmentType,
+        LocationResponseModel location,
         BigDecimal balance,
         BigDecimal monthRevenue,
         LocalDate lastUpdateDate
