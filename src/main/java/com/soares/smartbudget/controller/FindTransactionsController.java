@@ -4,7 +4,7 @@ import com.soares.smartbudget.controller.exception.BadRequestException;
 import com.soares.smartbudget.controller.model.TransactionResponseModel;
 import com.soares.smartbudget.controller.validator.DateValidator;
 import com.soares.smartbudget.mapper.TransactionMapper;
-import com.soares.smartbudget.service.FindAllTransactionsByDateService;
+import com.soares.smartbudget.service.FindTransactionsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class FindAllTransactionsByDateController {
+public class FindTransactionsController {
 
-    private final FindAllTransactionsByDateService service;
+    private final FindTransactionsService service;
 
     private final DateValidator validator = new DateValidator("transactionDate");
 

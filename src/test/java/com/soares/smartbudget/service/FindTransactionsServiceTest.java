@@ -2,7 +2,7 @@ package com.soares.smartbudget.service;
 
 import com.soares.smartbudget.AbstractIntegrationTest;
 import com.soares.smartbudget.service.core.Transaction;
-import com.soares.smartbudget.service.gateway.FindAllTransactionsByDateGateway;
+import com.soares.smartbudget.service.gateway.FindTransactionsGateway;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.Spy;
@@ -13,10 +13,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FindAllTransactionsByDateServiceTest extends AbstractIntegrationTest {
+public class FindTransactionsServiceTest extends AbstractIntegrationTest {
 
     @Autowired
-    private FindAllTransactionsByDateGateway gateway;
+    private FindTransactionsGateway gateway;
 
     @Spy
     private FakeService fakeService;
@@ -26,7 +26,7 @@ public class FindAllTransactionsByDateServiceTest extends AbstractIntegrationTes
         LocalDate date = LocalDate.now();
         LocalDate start = date.withDayOfMonth(1);
         LocalDate end = date.withDayOfMonth(date.lengthOfMonth());
-        FindAllTransactionsByDateService service = new FindAllTransactionsByDateService(gateway, fakeService);
+        FindTransactionsService service = new FindTransactionsService(gateway, fakeService);
 
         List<Transaction> response = service.findAllByDate(date);
 

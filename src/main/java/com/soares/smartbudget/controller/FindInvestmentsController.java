@@ -5,7 +5,7 @@ import com.soares.smartbudget.controller.model.InvestmentResponseModel;
 import com.soares.smartbudget.controller.validator.DateValidator;
 import com.soares.smartbudget.mapper.InvestmentMapper;
 import com.soares.smartbudget.service.core.Investment;
-import com.soares.smartbudget.service.gateway.FindAllInvestmentsGateway;
+import com.soares.smartbudget.service.gateway.FindInvestmentsGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
-public class FindAllInvestmentsController {
+public class FindInvestmentsController {
 
-    private final FindAllInvestmentsGateway gateway;
+    private final FindInvestmentsGateway gateway;
 
     private final DateValidator validator = new DateValidator("date");
 

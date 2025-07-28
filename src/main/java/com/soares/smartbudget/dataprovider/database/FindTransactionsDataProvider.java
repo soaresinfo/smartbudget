@@ -4,7 +4,7 @@ import com.soares.smartbudget.mapper.TransactionMapper;
 import com.soares.smartbudget.repository.TransactionRepository;
 import com.soares.smartbudget.repository.entity.TransactionEntity;
 import com.soares.smartbudget.service.core.Transaction;
-import com.soares.smartbudget.service.gateway.FindAllTransactionsByDateGateway;
+import com.soares.smartbudget.service.gateway.FindTransactionsGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class FindAllTransactionsByDateDataProvider implements FindAllTransactionsByDateGateway {
+public class FindTransactionsDataProvider implements FindTransactionsGateway {
 
     private final TransactionRepository repository;
 

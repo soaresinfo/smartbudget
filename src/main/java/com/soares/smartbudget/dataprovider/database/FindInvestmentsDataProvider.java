@@ -4,7 +4,7 @@ import com.soares.smartbudget.mapper.InvestmentMapper;
 import com.soares.smartbudget.repository.InvestmentRepository;
 import com.soares.smartbudget.repository.entity.InvestmentEntity;
 import com.soares.smartbudget.service.core.Investment;
-import com.soares.smartbudget.service.gateway.FindAllInvestmentsGateway;
+import com.soares.smartbudget.service.gateway.FindInvestmentsGateway;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class FindAllInvestmentsDataProvider implements FindAllInvestmentsGateway {
+public class FindInvestmentsDataProvider implements FindInvestmentsGateway {
 
     private final InvestmentRepository investmentRepository;
 

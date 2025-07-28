@@ -5,7 +5,7 @@ import com.soares.smartbudget.service.core.Investment;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FindAllInvestmentsGateway {
+public interface FindInvestmentsGateway {
 
     List<Investment> findAllInvestmentsByMonth(LocalDate startDate, LocalDate endDate);
 }

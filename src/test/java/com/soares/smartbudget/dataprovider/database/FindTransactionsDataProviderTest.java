@@ -13,10 +13,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FindAllTransactionsByDateDataProviderTest extends AbstractIntegrationTest {
+public class FindTransactionsDataProviderTest extends AbstractIntegrationTest {
 
     @Autowired
-    private FindAllTransactionsByDateDataProvider dataProvider;
+    private FindTransactionsDataProvider dataProvider;
 
     @Test
     void testFindAllByDateReturnsList(){

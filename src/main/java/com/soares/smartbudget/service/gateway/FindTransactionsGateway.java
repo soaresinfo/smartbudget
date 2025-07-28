@@ -5,7 +5,7 @@ import com.soares.smartbudget.service.core.Transaction;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FindAllTransactionsByDateGateway {
+public interface FindTransactionsGateway {
 
     List<Transaction> findByTransactionDate(LocalDate start, LocalDate end);
 }

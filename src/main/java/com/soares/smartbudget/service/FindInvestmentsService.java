@@ -1,7 +1,7 @@
 package com.soares.smartbudget.service;
 
 import com.soares.smartbudget.service.core.Investment;
-import com.soares.smartbudget.service.gateway.FindAllInvestmentsGateway;
+import com.soares.smartbudget.service.gateway.FindInvestmentsGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class FindAllInvestmentsService {
+public class FindInvestmentsService {
 
-    private final FindAllInvestmentsGateway gateway;
+    private final FindInvestmentsGateway gateway;
 
     public List<Investment> findAllInvestmentsByMonth(LocalDate startDate, LocalDate endDate) {
         return gateway.findAllInvestmentsByMonth(startDate, endDate);

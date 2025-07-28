@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `budget`.`income` (
   `id_income` BINARY(16) NOT NULL,
   `value` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
+  `income_date` DATE NOT NULL,
   `id_income_category` BINARY(16) NOT NULL,
   PRIMARY KEY (`id_income`),
   INDEX `fk_id_income_category_6878923_idx` (`id_income_category` ASC) VISIBLE,
