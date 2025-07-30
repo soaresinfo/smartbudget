@@ -25,7 +25,8 @@ public class FindInvestmentsDataProvider implements FindInvestmentsGateway {
     @Override
     public List<Investment> findAllInvestmentsByMonth(LocalDate startDate, LocalDate endDate) {
         String monthSearched = startDate.getMonth().name();
-        log.info("Starting to find all investments for month {}.", monthSearched);
+        String yearSearched = startDate.getYear() + "";
+        log.info("Starting to find all investments for month {} year {}.", monthSearched, yearSearched);
         try {
             log.debug("Searching for investments with last_update_date between {} and {}", startDate, endDate);
             List<InvestmentEntity> listInvestmentEntity = investmentRepository.findAllByLastUpdateDateBetween(startDate, endDate);
