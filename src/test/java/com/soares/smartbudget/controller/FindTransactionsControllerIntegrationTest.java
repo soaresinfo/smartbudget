@@ -21,14 +21,15 @@ public class FindTransactionsControllerIntegrationTest extends AbstractIntegrati
     @Test
     void testFindAllTransactionsByDateReturnsResponseWithTwoTransactions(){
         LocalDate date = LocalDate.now();
-        String transactionDate = date.format(DateTimeFormatter.ISO_DATE);
+        String endDate = date.format(DateTimeFormatter.ISO_DATE);
+        String startDate = date.minusMonths(1).format(DateTimeFormatter.ISO_DATE);
 
-        ResponseEntity<List<TransactionResponseModel>> response = controller.findAllByDate(transactionDate);
+        ResponseEntity<List<TransactionResponseModel>> response = controller.findAllByDate(startDate, endDate);
 
         assertThat(response).isNotNull();
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotEmpty()
-                .hasSize(2)
+                .hasSize(4)
                 .extracting(TransactionResponseModel::getTransactionDate,
                             TransactionResponseModel::getExpense,
                             TransactionResponseModel::getIdTransaction,

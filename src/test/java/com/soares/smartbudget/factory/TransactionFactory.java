@@ -21,7 +21,7 @@ public class TransactionFactory {
         return TransactionRequestModel.builder()
                 .description(FAKER.commerce().productName())
                 .transactionDate(LocalDate.now().format(formatter))
-                .value(FAKER.numerify("##.##"))
+                .value(FAKER.numerify("#.##"))
                 .idExpense(UUID.randomUUID().toString())
                 .build();
     }

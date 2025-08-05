@@ -24,13 +24,18 @@ public class FindTransactionsController {
 
     private final FindTransactionsService service;
 
-    private final DateValidator validator = new DateValidator("transactionDate");
+    private final DateValidator validatorStart = new DateValidator("startDate");
+
+    private final DateValidator validatorEnd = new DateValidator("startDate");
 
     @GetMapping(path = "/transactions", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<TransactionResponseModel>> findAllByDate(@RequestParam("transactionDate") String transactionDate) {
-        validator.validate(transactionDate).isInvalidThrow(BadRequestException.class);
-        LocalDate date = LocalDate.parse(transactionDate, DateTimeFormatter.ISO_DATE);
+    public ResponseEntity<List<TransactionResponseModel>> findAllByDate(@RequestParam("startDate") String startDate,
+                                                                        @RequestParam("endDate") String endDate) {
+        validatorStart.validate(startDate).isInvalidThrow(BadRequestException.class);
+        validatorEnd.validate(endDate).isInvalidThrow(BadRequestException.class);
+        LocalDate startDt = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
+        LocalDate endDt = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
 
-        return ResponseEntity.ok(TransactionMapper.INSTANCE.fromCoreToModel(service.findAllByDate(date)));
+        return ResponseEntity.ok(TransactionMapper.INSTANCE.fromCoreToModel(service.findAllByDate(startDt, endDt)));
     }
 }

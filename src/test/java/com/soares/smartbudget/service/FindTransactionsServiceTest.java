@@ -1,39 +1,40 @@
 package com.soares.smartbudget.service;
 
-import com.soares.smartbudget.AbstractIntegrationTest;
+import com.soares.smartbudget.factory.TransactionFactory;
 import com.soares.smartbudget.service.core.Transaction;
 import com.soares.smartbudget.service.gateway.FindTransactionsGateway;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.mockito.Spy;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
-public class FindTransactionsServiceTest extends AbstractIntegrationTest {
+@ExtendWith(MockitoExtension.class)
+public class FindTransactionsServiceTest {
 
-    @Autowired
+    @InjectMocks
+    private FindTransactionsService service;
+
+    @Mock
     private FindTransactionsGateway gateway;
-
-    @Spy
-    private FakeService fakeService;
 
     @Test
     void testFindAllTransactionsByDateReturnListWithTwo(){
         LocalDate date = LocalDate.now();
         LocalDate start = date.withDayOfMonth(1);
         LocalDate end = date.withDayOfMonth(date.lengthOfMonth());
-        FindTransactionsService service = new FindTransactionsService(gateway, fakeService);
 
-        List<Transaction> response = service.findAllByDate(date);
-
-        Mockito.verify(fakeService, Mockito.times(1)).save();
+        when(gateway.findByTransactionDate(start, end)).thenReturn(List.of(TransactionFactory.getCore()));
+        List<Transaction> response = service.findAllByDate(start,end);
 
         assertThat(response).isNotNull()
-                .hasSize(2)
+                .hasSize(1)
                 .extracting(Transaction::transactionDate)
                 .allMatch(dt -> dt.isAfter(start) && dt.isBefore(end));
     }

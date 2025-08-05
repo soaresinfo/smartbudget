@@ -14,12 +14,7 @@ public class FindTransactionsService {
 
     private final FindTransactionsGateway gateway;
 
-    private final FakeService fakeService;
-
-    public List<Transaction> findAllByDate(LocalDate date) {
-        LocalDate start = date.withDayOfMonth(1);
-        LocalDate end = date.withDayOfMonth(date.lengthOfMonth());
-        fakeService.save();
-        return gateway.findByTransactionDate(start, end);
+    public List<Transaction> findAllByDate(LocalDate startDate, LocalDate endDate) {
+        return gateway.findByTransactionDate(startDate, endDate);
     }
 }

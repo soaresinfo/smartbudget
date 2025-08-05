@@ -6,7 +6,6 @@ import com.soares.smartbudget.controller.model.TransactionResponseModel;
 import com.soares.smartbudget.factory.TransactionFactory;
 import com.soares.smartbudget.mapper.TransactionMapper;
 import com.soares.smartbudget.service.core.Transaction;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RequiredArgsConstructor
 public class SaveTransactionControllerIntegrationTest extends AbstractIntegrationTest {
 
     @Autowired
