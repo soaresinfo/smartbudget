@@ -1,0 +1,19 @@
+services:
+  db:
+    container_name: smartbudget-mysql_db
+    image: mysql:8.0.33
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=budget
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./config/mysql/my.cnf:/etc/mysql/conf.d/my-custom.cnf
+      - ./src/test/resources/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+      - ./src/test/resources/data.sql:/docker-entrypoint-initdb.d/2_data.sql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
