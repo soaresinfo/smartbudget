@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -36,5 +37,12 @@ public class ControllerAdviceHandler {
     ResponseEntity<Object> handleException(final BadRequestException bre, final WebRequest request){
         LOGGER.error("Requisição incorreta: {}", bre.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(bre.getValidationResult());
+    }
+
+    @ExceptionHandler
+    ResponseEntity<Object> handleException(final BadCredentialsException ex, final WebRequest request){
+        LOGGER.error("Usuário ou senha inválidos: {}", ex.getMessage());
+        ValidationResult result = ValidationResult.fail(List.of(Error.create("Usuário ou senha inválidos", ex.getMessage(), "401", null)));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
     }
 }
