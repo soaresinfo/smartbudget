@@ -165,3 +165,9 @@ VALUES
 (UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30380.00, 303.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
 -- 3 meses atrás
 (UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30070.00, 300.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
+
+-- Inserindo um usuário de exemplo (senha é 'password')
+INSERT IGNORE INTO `budget`.`users` (`id`, `username`, `password`, `role`)
+VALUES
+(UUID_TO_BIN(UUID()), 'admin', '$2b$12$Ier2fV7FHdnW6DkhsN4EKuAHByZSOXOsgn/SxzNrF3GR2U.SLLB5y', 'ADMIN'),
+(UUID_TO_BIN(UUID()), 'user', '$2b$12$Ier2fV7FHdnW6DkhsN4EKuAHByZSOXOsgn/SxzNrF3GR2U.SLLB5y', 'USER');
