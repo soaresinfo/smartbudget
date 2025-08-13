@@ -26,9 +26,11 @@ public class SaveTransactionDataProvider implements SaveTransactionGateway {
 
     @Override
     public Transaction save(Transaction transaction) {
+        logger.info("DataProvider: Salvando transação: {}", transaction);
         TransactionEntity entity = TransactionMapper.INSTANCE.fromCoreToEntity(transaction);
         try {
             TransactionEntity response = repository.save(entity);
+            logger.info("DataProvider: Transação salva com sucesso: {}", response);
             return TransactionMapper.INSTANCE.fromEntityToCore(response);
         }
         catch (Exception exception){

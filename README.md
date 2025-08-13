@@ -14,4 +14,7 @@ docker compose down -v
 
 #Teste de login com curl
 curl --json '{"username":"admin","password":"password"}' http://localhost:8080/budget/api/v1/auth/token
+
+#Conectando no mysql
+mysql -h 127.0.0.1 -P3306 -u root -proot
 ```
