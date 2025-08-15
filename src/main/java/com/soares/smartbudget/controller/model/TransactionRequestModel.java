@@ -14,10 +14,14 @@ import lombok.NoArgsConstructor;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class TransactionRequestModel {
 
+    public static final String ID_TRANSACTION = "id_transaction";
     public static final String VALUE = "value";
     public static final String DESCRIPTION = "description";
     public static final String TRANSACTION_DATE = "transaction_date";
     public static final String ID_EXPENSE = "id_expense";
+
+    @JsonProperty(value = ID_TRANSACTION)
+    private String idTransaction;
 
     @JsonProperty(value = VALUE)
     private String value;

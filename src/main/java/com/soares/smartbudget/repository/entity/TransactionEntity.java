@@ -38,7 +38,7 @@ public class TransactionEntity implements Serializable {
     @Column(name = "transaction_date", nullable = false, columnDefinition = "date")
     private LocalDate transactionDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "id_expense", referencedColumnName = "id_expense", columnDefinition = "binary(16)")
     private ExpenseEntity expense;
 }
