@@ -10,6 +10,7 @@ import com.soares.smartbudget.service.core.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,9 @@ public class SaveTransactionController {
 
     @PostMapping(path = "/transactions", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TransactionResponseModel> save(@RequestBody TransactionRequestModel model) {
-
+        if (!StringUtils.hasText(model.getIdTransaction())){
+            model.setIdTransaction(null);
+        }
         validator.validate(model).isInvalidThrow(BadRequestException.class);
         Transaction response = service.save(TransactionMapper.INSTANCE.fromModelToCore(model));
         return ResponseEntity.accepted().body(TransactionMapper.INSTANCE.fromCoreToModel(response));
