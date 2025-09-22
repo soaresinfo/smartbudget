@@ -70,6 +70,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`investment` (
   `id_investment` BINARY(16) NOT NULL,
+  `id_portfolio` BINARY(16) NOT NULL,
   `id_investment_type` BINARY(16) NOT NULL,
   `id_location` BINARY(16) NOT NULL,
   `balance` DECIMAL(10,2) NOT NULL,
@@ -78,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `budget`.`investment` (
   PRIMARY KEY (`id_investment`),
   INDEX `fk_investment_type_idx` (`id_investment_type` ASC) VISIBLE,
   INDEX `fk_location_idx` (`id_location` ASC) VISIBLE,
+  INDEX `idx_id_portfolio` (`id_portfolio` ASC) VISIBLE,
   CONSTRAINT `fk_investment_investment_type`
     FOREIGN KEY (`id_investment_type`)
     REFERENCES `budget`.`investment_type` (`id_investment_type`)

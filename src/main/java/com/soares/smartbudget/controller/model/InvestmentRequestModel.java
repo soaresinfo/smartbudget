@@ -12,27 +12,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class InvestmentResponseModel {
+public class InvestmentRequestModel {
 
     public static final String ID_INVESTMENT = "id_investment";
-    public static final String ID_PORTFOLIO = "id_portfolio";
-    public static final String INVESTMENT_TYPE = "investment_type";
+    public static final String ID_INVESTMENT_TYPE = "id_investment_type";
+    public static final String ID_LOCATION = "id_location";
     public static final String BALANCE = "balance";
     public static final String MONTH_REVENUE = "month_revenue";
-    public static final String LOCATION = "location";
     public static final String LAST_UPDATE_DATE = "last_update_date";
 
     @JsonProperty(value = ID_INVESTMENT)
     private String idInvestment;
 
-    @JsonProperty(value = ID_PORTFOLIO)
-    private String idPortfolio;
+    @JsonProperty(value = ID_INVESTMENT_TYPE)
+    private String idInvestmentType;
 
-    @JsonProperty(value = INVESTMENT_TYPE)
-    private InvestmentTypeResponseModel investmentType;
-
-    @JsonProperty(value = LOCATION)
-    private LocationResponseModel location;
+    @JsonProperty(value = ID_LOCATION)
+    private String idLocation;
 
     @JsonProperty(value = BALANCE)
     private String balance;

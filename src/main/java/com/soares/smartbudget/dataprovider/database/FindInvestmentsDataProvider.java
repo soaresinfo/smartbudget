@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -43,6 +44,30 @@ public class FindInvestmentsDataProvider implements FindInvestmentsGateway {
         } catch (Exception e) {
             log.error("Error finding investments for month {}.", monthSearched, e);
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public Optional<Investment> findLastInvestmentOfMonth(Investment investment, LocalDate date) {
+        String monthSearched = date.getMonth().name();
+        String yearSearched = date.getYear() + "";
+        log.info("Starting to find all investments for month {} year {}.", monthSearched, yearSearched);
+        try {
+            log.debug("Searching for lat investment for the month {}", monthSearched);
+            //List<InvestmentEntity> listInvestmentEntity = investmentRepository.findAllByLastUpdateDateBetween(startDate, endDate);
+
+            //if (listInvestmentEntity.isEmpty()) {
+                log.info("No investments found for month {}.", monthSearched);
+                return Optional.empty();
+            //}
+
+            //List<Investment> investments = investmentMapper.fromEntityToCore(listInvestmentEntity);
+
+            //log.info("Successfully found {} investments for the month.", investments.size());
+            //return investments;
+        } catch (Exception e) {
+            log.error("Error finding investments for month {}.", monthSearched, e);
+            return Optional.empty();
         }
     }
 }
