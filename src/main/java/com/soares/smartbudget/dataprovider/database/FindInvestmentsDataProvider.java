@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,23 +49,24 @@ public class FindInvestmentsDataProvider implements FindInvestmentsGateway {
     }
 
     @Override
-    public Optional<Investment> findLastInvestmentOfMonth(Investment investment, LocalDate date) {
-        String monthSearched = date.getMonth().name();
-        String yearSearched = date.getYear() + "";
+    public Optional<Investment> findInvestmentByPortfolioAndPreviousMonth(Investment investment) {
+        LocalDate previousMonthStart = investment.lastUpdateDate().minusMonths(1).withDayOfMonth(1);
+        LocalDate previousMonthEnd = previousMonthStart.withDayOfMonth(previousMonthStart.lengthOfMonth());
+        String monthSearched = previousMonthStart.getMonth().name();
+        String yearSearched = previousMonthStart.getYear() + "";
         log.info("Starting to find all investments for month {} year {}.", monthSearched, yearSearched);
         try {
             log.debug("Searching for lat investment for the month {}", monthSearched);
-            //List<InvestmentEntity> listInvestmentEntity = investmentRepository.findAllByLastUpdateDateBetween(startDate, endDate);
+            List<InvestmentEntity> listInvestmentEntity = investmentRepository.findAllByIdPortfolioAndLastUpdateDateBetween(investment.idPortfolio(),previousMonthStart, previousMonthEnd);
 
-            //if (listInvestmentEntity.isEmpty()) {
+            if (listInvestmentEntity.isEmpty()) {
                 log.info("No investments found for month {}.", monthSearched);
                 return Optional.empty();
-            //}
+            }
 
-            //List<Investment> investments = investmentMapper.fromEntityToCore(listInvestmentEntity);
-
-            //log.info("Successfully found {} investments for the month.", investments.size());
-            //return investments;
+            return listInvestmentEntity.stream()
+                    .max(Comparator.comparing(InvestmentEntity::getLastUpdateDate))
+                    .map(investmentMapper::fromEntityToCore);
         } catch (Exception e) {
             log.error("Error finding investments for month {}.", monthSearched, e);
             return Optional.empty();

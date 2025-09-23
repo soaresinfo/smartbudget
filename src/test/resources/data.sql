@@ -122,13 +122,13 @@ VALUES
 INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_portfolio`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
 VALUES
 -- Mês atual
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7500.50, 75.00, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7500.50, 75.00, NOW()),
 -- 1 mês atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7425.00, 74.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7425.00, 74.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
 -- 2 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7350.80, 73.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7350.80, 73.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
 -- 3 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7280.00, 72.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7280.00, 72.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
 
 -- 3. Carteira de Ações na XP
 INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_portfolio`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)

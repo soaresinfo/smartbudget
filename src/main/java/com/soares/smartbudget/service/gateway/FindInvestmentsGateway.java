@@ -10,5 +10,5 @@ public interface FindInvestmentsGateway {
 
     List<Investment> findAllInvestmentsByMonth(LocalDate startDate, LocalDate endDate);
 
-    Optional<Investment> findLastInvestmentOfMonth(Investment investment, LocalDate date);
+    Optional<Investment> findInvestmentByPortfolioAndPreviousMonth(Investment investment);
 }
