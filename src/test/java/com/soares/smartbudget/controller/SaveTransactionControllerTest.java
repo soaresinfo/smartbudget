@@ -53,7 +53,7 @@ public class SaveTransactionControllerTest {
         verify(service, only()).save(eq(transaction));
 
         assertThat(response).isNotNull();
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(response.getBody()).isNotNull()
                 .hasNoNullFieldsOrProperties()
                 .extracting(TransactionResponseModel::getIdTransaction,

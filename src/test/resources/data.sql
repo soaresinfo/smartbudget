@@ -107,64 +107,64 @@ VALUES
 -- simulando a evolução do saldo e do rendimento ao longo do tempo.
 
 -- 1. Investimento Conservador no Itaú (Tesouro Selic)
-INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
+INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_portfolio`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
 VALUES
 -- Mês atual
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 15000.75, 150.00, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('1c2e1b7b-cba4-43ba-acaf-d5268d1127be'), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 15000.75, 150.00, NOW()),
 -- 1 mês atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 14850.50, 148.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('1c2e1b7b-cba4-43ba-acaf-d5268d1127be'), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 14850.50, 148.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
 -- 2 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 14700.25, 147.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('1c2e1b7b-cba4-43ba-acaf-d5268d1127be'), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 14700.25, 147.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
 -- 3 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 14550.00, 145.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('1c2e1b7b-cba4-43ba-acaf-d5268d1127be'), UUID_TO_BIN('a1a1b2b2-c3c3-4d4d-8e8e-f0f0a1a1b2b2'), UUID_TO_BIN('1e695212-3559-444b-98b7-1165a3356e4a'), 14550.00, 145.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
 
 -- 2. Fundo Imobiliário no Nubank
-INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
+INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_portfolio`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
 VALUES
 -- Mês atual
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7500.50, 75.00, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7500.50, 75.00, NOW()),
 -- 1 mês atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7425.00, 74.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7425.00, 74.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
 -- 2 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7350.80, 73.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7350.80, 73.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
 -- 3 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7280.00, 72.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('b797f084-fd6c-4d42-8941-72583bfffc8c'), UUID_TO_BIN('f6f6a1a1-b2b2-4c4c-8d8d-e5e5f6f6a1a1'), UUID_TO_BIN('e5f6a1b2-c3d4-e5f6-a1b2-c3d4e5f6a1b2'), 7280.00, 72.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
 
 -- 3. Carteira de Ações na XP
-INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
+INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_portfolio`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
 VALUES
 -- Mês atual
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22345.00, 223.00, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22345.00, 223.00, NOW()),
 -- 1 mês atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22100.00, -50.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)), -- Simulando uma pequena perda
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22100.00, -50.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)), -- Simulando uma pequena perda
 -- 2 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22150.50, 300.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 22150.50, 300.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
 -- 3 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 21850.00, 180.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('94f664be-903b-4637-b30a-c66c43ea0972'), UUID_TO_BIN('a2b2c3d4-e5f6-4a1b-8c2d-e3f4a5b6c7d8'), UUID_TO_BIN('a2b3c4d5-e6f1-a2b3-c4d5-e6f1a2b3c4d5'), 21850.00, 180.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
 
 -- 4. Criptomoedas no BTG Pactual
-INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
+INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_portfolio`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
 VALUES
 -- Mês atual
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5800.20, 580.00, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('3de5b8e2-1760-4e8a-9436-6beca2cd5b16'), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5800.20, 580.00, NOW()),
 -- 1 mês atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5220.00, -200.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)), -- Simulando volatilidade
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('3de5b8e2-1760-4e8a-9436-6beca2cd5b16'), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5220.00, -200.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)), -- Simulando volatilidade
 -- 2 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5420.00, 420.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('3de5b8e2-1760-4e8a-9436-6beca2cd5b16'), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5420.00, 420.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
 -- 3 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5000.00, 500.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('3de5b8e2-1760-4e8a-9436-6beca2cd5b16'), UUID_TO_BIN('c4d5e6f1-a2b3-4c3d-8e4f-a5b6c7d8e9f0'), UUID_TO_BIN('d4e5f6a1-b2c3-d4e5-f6a1-b2c3d4e5f6a1'), 5000.00, 500.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
 
 -- 5. CDB no Bradesco
-INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
+INSERT IGNORE INTO `budget`.`investment` (`id_investment`, `id_portfolio`, `id_investment_type`, `id_location`, `balance`, `month_revenue`, `last_update_date`)
 VALUES
 -- Mês atual
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 31000.00, 310.00, NOW()),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('bd46e3dc-79d0-428e-b6d7-727ade7adbf8'), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 31000.00, 310.00, NOW()),
 -- 1 mês atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30690.00, 306.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('bd46e3dc-79d0-428e-b6d7-727ade7adbf8'), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30690.00, 306.00, DATE_SUB(NOW(), INTERVAL 1 MONTH)),
 -- 2 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30380.00, 303.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('bd46e3dc-79d0-428e-b6d7-727ade7adbf8'), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30380.00, 303.00, DATE_SUB(NOW(), INTERVAL 2 MONTH)),
 -- 3 meses atrás
-(UUID_TO_BIN(UUID()), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30070.00, 300.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
+(UUID_TO_BIN(UUID()), UUID_TO_BIN('bd46e3dc-79d0-428e-b6d7-727ade7adbf8'), UUID_TO_BIN('b2b2c3c3-d4d4-4e4e-8f8f-a1a1b2b2c3c3'), UUID_TO_BIN('f4a2e82c-642d-4b17-bb0e-27b58f6a8b5a'), 30070.00, 300.00, DATE_SUB(NOW(), INTERVAL 3 MONTH));
 
 -- Inserindo um usuário de exemplo (senha é 'password')
 INSERT IGNORE INTO `budget`.`users` (`id`, `username`, `password`, `role`)

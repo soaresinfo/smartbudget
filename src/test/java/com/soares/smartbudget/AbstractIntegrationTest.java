@@ -1,11 +1,13 @@
 package com.soares.smartbudget;
 
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
+@AutoConfigureMockMvc
 @ContextConfiguration(initializers = ContainerInitializer.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@SpringBootTest
 @Sql(scripts = {"classpath:data.sql"})
 public abstract class AbstractIntegrationTest {
 

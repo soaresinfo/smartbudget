@@ -30,11 +30,14 @@ public class InvestmentEntity implements Serializable {
     @Column(name = "id_investment", nullable = false, columnDefinition = "binary(16)")
     private UUID idInvestment;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @Column(name = "id_portfolio", nullable = false, columnDefinition = "binary(16)")
+    private UUID idPortfolio;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "id_investment_type", referencedColumnName = "id_investment_type", columnDefinition = "binary(16)")
     private InvestmentTypeEntity investmentType;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "id_location", referencedColumnName = "id_location", columnDefinition = "binary(16)")
     private LocationEntity location;
 

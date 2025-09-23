@@ -4,6 +4,7 @@ import br.com.fluentvalidator.context.Error;
 import br.com.fluentvalidator.context.ValidationResult;
 import com.soares.smartbudget.controller.exception.BadRequestException;
 import com.soares.smartbudget.dataprovider.exception.NotFoundException;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,13 @@ public class ControllerAdviceHandler {
     @ExceptionHandler
     ResponseEntity<Object> handleException(final BadCredentialsException ex, final WebRequest request){
         LOGGER.error("Usuário ou senha inválidos: {}", ex.getMessage());
+        ValidationResult result = ValidationResult.fail(List.of(Error.create("Usuário ou senha inválidos", ex.getMessage(), "401", null)));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
+    }
+
+    @ExceptionHandler
+    ResponseEntity<Object> handleException(final ExpiredJwtException ex, final WebRequest request){
+        LOGGER.error("Token expirado: {}", ex.getMessage());
         ValidationResult result = ValidationResult.fail(List.of(Error.create("Usuário ou senha inválidos", ex.getMessage(), "401", null)));
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
     }

@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public record Investment(
         UUID idInvestment,
+        UUID idPortfolio,
         InvestmentType investmentType,
         Location location,
         BigDecimal balance,
