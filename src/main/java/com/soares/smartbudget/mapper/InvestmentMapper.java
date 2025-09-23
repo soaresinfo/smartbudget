@@ -5,6 +5,7 @@ import com.soares.smartbudget.controller.model.InvestmentResponseModel;
 import com.soares.smartbudget.repository.entity.InvestmentEntity;
 import com.soares.smartbudget.service.core.Investment;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface InvestmentMapper {
     List<Investment> fromEntityToCore(List<InvestmentEntity> entities);
     List<InvestmentResponseModel> fromCoreToModel(List<Investment> core);
     InvestmentEntity fromCoreToEntity(Investment core);
+    @Mapping(source = "idInvestmentType", target = "investmentType.idInvestmentType")
+    @Mapping(source = "idLocation", target = "location.idLocation")
     Investment fromModelToCore(InvestmentRequestModel model);
     InvestmentResponseModel fromCoreToModel(Investment core);
 }

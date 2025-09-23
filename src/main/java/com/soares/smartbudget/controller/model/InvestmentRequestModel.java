@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class InvestmentRequestModel {
 
     public static final String ID_INVESTMENT = "id_investment";
+    public static final String ID_PORTFOLIO = "id_portfolio";
     public static final String ID_INVESTMENT_TYPE = "id_investment_type";
     public static final String ID_LOCATION = "id_location";
     public static final String BALANCE = "balance";
@@ -23,6 +24,9 @@ public class InvestmentRequestModel {
 
     @JsonProperty(value = ID_INVESTMENT)
     private String idInvestment;
+
+    @JsonProperty(value = ID_PORTFOLIO)
+    private String idPortfolio;
 
     @JsonProperty(value = ID_INVESTMENT_TYPE)
     private String idInvestmentType;
