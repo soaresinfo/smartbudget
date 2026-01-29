@@ -59,6 +59,6 @@ public class SaveTransactionServiceTest {
     }
 
     private Transaction getNewCore(Transaction core){
-        return new Transaction(UUID.randomUUID(), core.value(), core.description(), core.transactionDate(), core.expense());
+        return new Transaction(UUID.randomUUID(), core.value(), core.description(), core.transactionDate(), core.category());
     }
 }

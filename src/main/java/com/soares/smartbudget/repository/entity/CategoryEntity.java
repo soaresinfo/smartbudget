@@ -17,20 +17,25 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "expense")
-public class ExpenseEntity implements Serializable {
+@Table(name = "category")
+public class CategoryEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 8174956646170236783L;
 
     @Id
     @GeneratedValue
     @UuidGenerator
-    @Column(name = "id_expense", nullable = false, columnDefinition = "binary(16)")
-    private UUID idExpense;
+    @Column(name = "id_category", nullable = false, columnDefinition = "binary(16)")
+    private UUID idCategory;
 
-    @Column(name = "planned_value", nullable = false, columnDefinition = "decimal(10,2)")
+    @Column(name = "planned_value", nullable = true, columnDefinition = "decimal(10,2)")
     private BigDecimal plannedValue;
 
     @Column(name = "description", nullable = false, columnDefinition = "varchar(100)")
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id_category")
+    private CategoryEntity parent;
+
 }

@@ -15,7 +15,7 @@ public interface TransactionMapper {
 
     TransactionMapper INSTANCE = Mappers.getMapper(TransactionMapper.class);
 
-    @Mapping(source = "idExpense", target = "expense.idExpense")
+    @Mapping(source = "idCategory", target = "category.idCategory")
     Transaction fromModelToCore(TransactionRequestModel source);
 
     TransactionResponseModel fromCoreToModel(Transaction source);

@@ -18,13 +18,13 @@ CREATE SCHEMA IF NOT EXISTS `budget` DEFAULT CHARACTER SET utf8 ;
 USE `budget` ;
 
 -- -----------------------------------------------------
--- Table `budget`.`expense`
+-- Table `budget`.`category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `budget`.`expense` (
-  `id_expense` BINARY(16) NOT NULL,
+CREATE TABLE IF NOT EXISTS `budget`.`category` (
+  `id_category` BINARY(16) NOT NULL,
   `planned_value` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id_expense`))
+  PRIMARY KEY (`id_category`))
 ENGINE = InnoDB;
 
 
@@ -36,12 +36,12 @@ CREATE TABLE IF NOT EXISTS `budget`.`transaction` (
   `value_transaction` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(100) NULL,
   `transaction_date` DATE NOT NULL,
-  `id_expense` BINARY(16) NOT NULL,
+  `id_category` BINARY(16) NOT NULL,
   PRIMARY KEY (`id_transaction`),
-  INDEX `fk_id_expense_96897657_idx` (`id_expense` ASC) VISIBLE,
-  CONSTRAINT `fk_id_expense_96897657`
-    FOREIGN KEY (`id_expense`)
-    REFERENCES `budget`.`expense` (`id_expense`)
+  INDEX `fk_id_category_96897657_idx` (`id_category` ASC) VISIBLE,
+  CONSTRAINT `fk_id_category_96897657`
+    FOREIGN KEY (`id_category`)
+    REFERENCES `budget`.`category` (`id_category`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

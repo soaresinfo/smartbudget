@@ -18,13 +18,14 @@ CREATE SCHEMA IF NOT EXISTS `budget` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8m
 USE `budget` ;
 
 -- -----------------------------------------------------
--- Table `budget`.`expense`
+-- Table `budget`.`category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `budget`.`expense` (
-  `id_expense` BINARY(16) NOT NULL,
-  `planned_value` DECIMAL(10,2) NOT NULL,
+CREATE TABLE IF NOT EXISTS `budget`.`category` (
+  `id_category` BINARY(16) NOT NULL,
+  `parent_id_category` BINARY(16) NULL,
+  `planned_value` DECIMAL(10,2) NULL,
   `description` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id_expense`))
+  PRIMARY KEY (`id_category`))
 ENGINE = InnoDB;
 
 
@@ -36,12 +37,14 @@ CREATE TABLE IF NOT EXISTS `budget`.`transaction` (
   `value_transaction` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(100) NULL,
   `transaction_date` DATE NOT NULL,
-  `id_expense` BINARY(16) NOT NULL,
+  `id_category` BINARY(16) NOT NULL,
+  `installment_number` INT DEFAULT NULL,
+  `installment_total` INT DEFAULT NULL,
   PRIMARY KEY (`id_transaction`),
-  INDEX `fk_id_expense_96897657_idx` (`id_expense` ASC) VISIBLE,
-  CONSTRAINT `fk_id_expense_96897657`
-    FOREIGN KEY (`id_expense`)
-    REFERENCES `budget`.`expense` (`id_expense`)
+  INDEX `fk_id_category_96897657_idx` (`id_category` ASC) VISIBLE,
+  CONSTRAINT `fk_id_category_96897657`
+    FOREIGN KEY (`id_category`)
+    REFERENCES `budget`.`category` (`id_category`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -137,3 +140,38 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+DELIMITER //
+
+DROP FUNCTION IF EXISTS UUID_TO_BIN_SWAP //
+
+CREATE FUNCTION UUID_TO_BIN(uuid_str CHAR(36))
+RETURNS BINARY(16)
+DETERMINISTIC
+BEGIN
+    RETURN UNHEX(CONCAT(
+        SUBSTRING(uuid_str, 15, 4),   -- time_mid
+        SUBSTRING(uuid_str, 10, 4),   -- time_low
+        SUBSTRING(uuid_str,  1, 8),   -- time_hi + version
+        SUBSTRING(uuid_str, 20, 4),
+        SUBSTRING(uuid_str, 25, 12)
+    ));
+END //
+
+DROP FUNCTION IF EXISTS BIN_TO_UUID //
+
+CREATE FUNCTION BIN_TO_UUID(bin_uuid BINARY(16))
+RETURNS CHAR(36)
+DETERMINISTIC
+BEGIN
+    SET @hex = HEX(bin_uuid);
+    RETURN LOWER(CONCAT(
+        SUBSTRING(@hex,  1,  8), '-',
+        SUBSTRING(@hex,  9,  4), '-',
+        SUBSTRING(@hex, 13,  4), '-',
+        SUBSTRING(@hex, 17,  4), '-',
+        SUBSTRING(@hex, 21, 12)
+    ));
+END //
+
+DELIMITER ;

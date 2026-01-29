@@ -34,4 +34,18 @@ public class FindExpenseDataProvider implements FindExpenseGateway {
 
         return expenseList;
     }
+
+    @Override
+    public List<Expense> findMainCategories() {
+        log.info("Iniciando busca por todas as despesas no banco de dados.");
+        var expenseEntities = repository.findByParentIsNull();
+        List<Expense> expenseList = StreamSupport
+                .stream(expenseEntities.spliterator(), false)
+                .map(mapper::fromEntityToCore)
+                .collect(Collectors.toList());
+
+        log.info("Busca finalizada. {} despesas encontradas.", expenseList.size());
+
+        return expenseList;
+    }
 }

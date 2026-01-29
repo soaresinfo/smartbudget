@@ -16,4 +16,8 @@ public class FindExpenseService {
     public List<Expense> findAll(){
         return gateway.findAll();
     }
+
+    public List<Expense> findMainCategories(){
+        return gateway.findMainCategories();
+    }
 }

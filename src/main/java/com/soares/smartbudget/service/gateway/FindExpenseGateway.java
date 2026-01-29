@@ -7,4 +7,6 @@ import java.util.List;
 public interface FindExpenseGateway {
 
     List<Expense> findAll();
+
+    List<Expense> findMainCategories();
 }

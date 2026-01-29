@@ -2,7 +2,7 @@ package com.soares.smartbudget.mapper;
 
 import com.soares.smartbudget.controller.model.ExpenseRequestModel;
 import com.soares.smartbudget.controller.model.ExpenseResponseModel;
-import com.soares.smartbudget.repository.entity.ExpenseEntity;
+import com.soares.smartbudget.repository.entity.CategoryEntity;
 import com.soares.smartbudget.service.core.Expense;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,12 +15,12 @@ public interface ExpenseMapper {
 
     ExpenseMapper INSTANCE = Mappers.getMapper(ExpenseMapper.class);
 
-    @Mapping(target = "idExpense", ignore = true)
+    @Mapping(target = "idCategory", ignore = true)
     Expense fromModelToCore(ExpenseRequestModel source);
 
-    List<Expense> fromEntityToCore(List<ExpenseEntity> entity);
+    List<Expense> fromEntityToCore(List<CategoryEntity> entity);
 
-    Expense fromEntityToCore(ExpenseEntity entity);
+    Expense fromEntityToCore(CategoryEntity entity);
 
     List<ExpenseResponseModel> fromCoreToModel(List<Expense> source);
 }

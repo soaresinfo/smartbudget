@@ -2,9 +2,9 @@ package com.soares.smartbudget.factory;
 
 import com.github.javafaker.Faker;
 import com.soares.smartbudget.controller.model.TransactionRequestModel;
-import com.soares.smartbudget.repository.entity.ExpenseEntity;
+import com.soares.smartbudget.repository.entity.CategoryEntity;
 import com.soares.smartbudget.repository.entity.TransactionEntity;
-import com.soares.smartbudget.service.core.Expense;
+import com.soares.smartbudget.service.core.Category;
 import com.soares.smartbudget.service.core.Transaction;
 
 import java.math.BigDecimal;
@@ -22,16 +22,16 @@ public class TransactionFactory {
                 .description(FAKER.commerce().productName())
                 .transactionDate(LocalDate.now().format(formatter))
                 .value(FAKER.numerify("#.##"))
-                .idExpense(UUID.randomUUID().toString())
+                .idCategory(UUID.randomUUID().toString())
                 .build();
     }
 
     public static Transaction getCore() {
-        return new Transaction(null, BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(), new Expense(UUID.randomUUID(), null, null) );
+        return new Transaction(null, BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(), new Category(UUID.randomUUID(), null, null, null) );
     }
 
     public static Transaction getCoreFull() {
-        return new Transaction(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(), new Expense(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().material()) );
+        return new Transaction(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(), new Category(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().material(), UUID.randomUUID()) );
     }
 
     public static TransactionEntity getEntity() {
@@ -39,7 +39,7 @@ public class TransactionFactory {
                 .description(FAKER.commerce().productName())
                 .value(BigDecimal.TEN)
                 .transactionDate(LocalDate.now())
-                .expense(ExpenseEntity.builder().idExpense(UUID.randomUUID()).build())
+                .category(CategoryEntity.builder().idCategory(UUID.randomUUID()).build())
                 .build();
     }
 }

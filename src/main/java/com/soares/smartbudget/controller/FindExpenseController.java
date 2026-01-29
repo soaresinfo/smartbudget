@@ -25,4 +25,10 @@ public class FindExpenseController {
         List<Expense> expenses = service.findAll();
         return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
     }
+
+    @GetMapping(path = "/categories/main", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ExpenseResponseModel>> findMainCategories(){
+        List<Expense> expenses = service.findMainCategories();
+        return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
+    }
 }

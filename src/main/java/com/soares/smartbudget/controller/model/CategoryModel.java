@@ -12,14 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class ExpenseResponseModel {
+public class CategoryModel {
 
-    private static final String ID_CATEGORY = "id_category";
+    private static final String ID_EXPENSE = "id_category";
     private static final String PLANNED_VALUE = "planned_value";
     private static final String DESCRIPTION = "description";
-    private static final String CATEGORY = "category";
 
-    @JsonProperty(value = ID_CATEGORY)
+    @JsonProperty(value = ID_EXPENSE)
     private String idCategory;
 
     @JsonProperty(value = PLANNED_VALUE)
@@ -27,7 +26,4 @@ public class ExpenseResponseModel {
 
     @JsonProperty(value = DESCRIPTION)
     private String description;
-
-    @JsonProperty(value = CATEGORY)
-    private CategoryModel category;
 }

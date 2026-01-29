@@ -31,7 +31,7 @@ public class FindTransactionsControllerIntegrationTest extends AbstractIntegrati
         assertThat(response.getBody()).isNotEmpty()
                 .hasSize(4)
                 .extracting(TransactionResponseModel::getTransactionDate,
-                            TransactionResponseModel::getExpense,
+                            TransactionResponseModel::getCategory,
                             TransactionResponseModel::getIdTransaction,
                             TransactionResponseModel::getDescription,
                             TransactionResponseModel::getValue)
