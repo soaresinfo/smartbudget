@@ -9,9 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,6 +25,12 @@ public class FindExpenseController {
     @GetMapping(path = "/expenses", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ExpenseResponseModel>> findAll(){
         List<Expense> expenses = service.findAll();
+        return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
+    }
+
+    @GetMapping(path = "/categories", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ExpenseResponseModel>> findAllByParentId(@RequestParam("idParent") String idParent){
+        List<Expense> expenses = service.findCategoriesByParentId(UUID.fromString(idParent));
         return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
     }
 

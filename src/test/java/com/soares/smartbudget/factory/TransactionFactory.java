@@ -31,7 +31,9 @@ public class TransactionFactory {
     }
 
     public static Transaction getCoreFull() {
-        return new Transaction(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(), new Category(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().material(), UUID.randomUUID()) );
+        return new Transaction(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(),
+                new Category(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().material(),
+                        new Category(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().material(), null)) );
     }
 
     public static TransactionEntity getEntity() {

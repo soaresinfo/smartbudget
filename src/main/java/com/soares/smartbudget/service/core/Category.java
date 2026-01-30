@@ -6,5 +6,5 @@ import java.util.UUID;
 public record Category(UUID idCategory,
                        BigDecimal plannedValue,
                        String description,
-                       UUID parentIdCategory) {
+                       Category parent) {
 }

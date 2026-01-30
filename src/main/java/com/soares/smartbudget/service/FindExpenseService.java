@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -19,5 +20,9 @@ public class FindExpenseService {
 
     public List<Expense> findMainCategories(){
         return gateway.findMainCategories();
+    }
+
+    public List<Expense> findCategoriesByParentId(UUID parentId){
+        return gateway.findCategoriesByParentId(parentId);
     }
 }
