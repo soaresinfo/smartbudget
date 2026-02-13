@@ -16,10 +16,14 @@ public class ExpenseRequestModel {
 
     private static final String PLANNED_VALUE = "planned_value";
     private static final String DESCRIPTION = "description";
+    private static final String CATEGORY = "category";
 
     @JsonProperty(value = PLANNED_VALUE)
     private String plannedValue;
 
     @JsonProperty(value = DESCRIPTION)
     private String description;
+
+    @JsonProperty(value = CATEGORY)
+    private CategoryModel category;
 }

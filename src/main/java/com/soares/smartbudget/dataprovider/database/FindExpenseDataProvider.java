@@ -25,42 +25,42 @@ public class FindExpenseDataProvider implements FindExpenseGateway {
 
     @Override
     public List<Expense> findAll() {
-        log.info("Iniciando busca por todas as despesas no banco de dados.");
+        log.info("Iniciando busca por todas as categorias no banco de dados.");
         var expenseEntities = repository.findAll();
         List<Expense> expenseList = StreamSupport
                 .stream(expenseEntities.spliterator(), false)
                 .map(mapper::fromEntityToCore)
                 .collect(Collectors.toList());
 
-        log.info("Busca finalizada. {} despesas encontradas.", expenseList.size());
+        log.info("Busca finalizada. {} categorias encontradas.", expenseList.size());
 
         return expenseList;
     }
 
     @Override
     public List<Expense> findCategoriesByParentId(UUID parentId) {
-        log.info("Iniciando busca por todas as despesas no banco de dados.");
+        log.info("Iniciando busca por subcategorias com parentId {}.", parentId.toString());
         var expenseEntities = repository.findCategoriesByParent(CategoryEntity.builder().idCategory(parentId).build());
         List<Expense> expenseList = StreamSupport
                 .stream(expenseEntities.spliterator(), false)
                 .map(mapper::fromEntityToCore)
                 .collect(Collectors.toList());
 
-        log.info("Busca finalizada. {} despesas encontradas.", expenseList.size());
+        log.info("Busca finalizada. {} subcategorias encontradas.", expenseList.size());
 
         return expenseList;
     }
 
     @Override
     public List<Expense> findMainCategories() {
-        log.info("Iniciando busca por todas as despesas no banco de dados.");
+        log.info("Iniciando busca por todas as principais categorias no banco de dados.");
         var expenseEntities = repository.findByParentIsNull();
         List<Expense> expenseList = StreamSupport
                 .stream(expenseEntities.spliterator(), false)
                 .map(mapper::fromEntityToCore)
                 .collect(Collectors.toList());
 
-        log.info("Busca finalizada. {} despesas encontradas.", expenseList.size());
+        log.info("Busca finalizada. {} categorias encontradas.", expenseList.size());
 
         return expenseList;
     }

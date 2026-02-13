@@ -45,9 +45,9 @@ public class TransactionEntity implements Serializable {
     @JoinColumn(name = "id_category", referencedColumnName = "id_category", columnDefinition = "binary(16)")
     private CategoryEntity category;
 
-    @Column(name = "installment_number", nullable = true, columnDefinition = "int")
+    @Column(name = "installment_number", columnDefinition = "int")
     private Integer installmentNumber;
 
-    @Column(name = "installment_total", nullable = true, columnDefinition = "int")
-    private BigDecimal installmentTotal;
+    @Column(name = "installment_total", columnDefinition = "int")
+    private Integer installmentTotal;
 }

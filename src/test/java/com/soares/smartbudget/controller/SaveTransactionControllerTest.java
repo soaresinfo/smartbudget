@@ -86,7 +86,7 @@ public class SaveTransactionControllerTest {
     }
 
     private Transaction buildTransaction(Transaction core){
-        return new Transaction(UUID.randomUUID(), core.value(), core.description(), core.transactionDate(), core.category());
+        return new Transaction(UUID.randomUUID(), core.value(), core.description(), core.transactionDate(), core.category(), core.installmentNumber(), core.installmentTotal());
     }
 
     @Test

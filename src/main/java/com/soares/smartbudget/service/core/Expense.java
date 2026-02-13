@@ -5,5 +5,6 @@ import java.util.UUID;
 
 public record Expense(UUID idCategory,
                       BigDecimal plannedValue,
-                      String description) {
+                      String description,
+                      Category category) {
 }

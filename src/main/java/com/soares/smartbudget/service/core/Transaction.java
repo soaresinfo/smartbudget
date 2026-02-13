@@ -8,5 +8,7 @@ public record Transaction(UUID idTransaction,
                           BigDecimal value,
                           String description,
                           LocalDate transactionDate,
-                          Category category) {
+                          Category category,
+                          Integer installmentNumber,
+                          Integer installmentTotal) {
 }

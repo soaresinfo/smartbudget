@@ -37,7 +37,7 @@ public class CategoryEntity implements Serializable {
     @Column(name = "description", nullable = false, columnDefinition = "varchar(100)")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_id_category")
     private CategoryEntity parent;
 
