@@ -5,6 +5,7 @@ import com.soares.smartbudget.service.gateway.SaveTransactionGateway;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class SaveTransactionService {
         //crie um novo objeto transaction com o novo parametro installmentNumber) {
         return new Transaction(
                 transaction.idTransaction(),
-                transaction.value(),
+                transaction.installmentTotal().equals(1) ? transaction.value() : transaction.value().divide(new BigDecimal(transaction.installmentTotal())),
                 transaction.description(),
                 transactionDate,
                 transaction.category(),
