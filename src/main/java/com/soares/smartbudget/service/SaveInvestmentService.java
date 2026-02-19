@@ -27,7 +27,7 @@ public class SaveInvestmentService {
             UUID newPortfolioId = UUID.randomUUID();
             Investment newPosition = new Investment(
                     null,
-                    newPortfolioId,
+                    newPortfolioId.toString(),
                     investment.investmentType(),
                     investment.location(),
                     investment.balance(),

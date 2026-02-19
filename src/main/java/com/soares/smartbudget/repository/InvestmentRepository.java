@@ -11,5 +11,5 @@ public interface InvestmentRepository extends CrudRepository<InvestmentEntity, U
 
     List<InvestmentEntity> findAllByLastUpdateDateBetween(LocalDate startDate, LocalDate endDate);
 
-    List<InvestmentEntity> findAllByIdPortfolioAndLastUpdateDateBetween(UUID idPortfolio, LocalDate startDate, LocalDate endDate);
+    List<InvestmentEntity> findAllByIdPortfolioAndLastUpdateDateBetween(String idPortfolio, LocalDate startDate, LocalDate endDate);
 }

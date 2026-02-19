@@ -5,13 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.type.SqlTypes;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -24,11 +20,9 @@ public class IncomeCategoryEntity implements Serializable {
     private static final long serialVersionUID = -8094445257853020439L;
 
     @Id
-    @GeneratedValue
-    @UuidGenerator(style = UuidGenerator.Style.TIME)
-    @JdbcTypeCode(SqlTypes.BINARY)
-    @Column(name = "id_income_category", nullable = false, columnDefinition = "binary(16)")
-    private UUID idIncomeCategory;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_income_category", nullable = false, columnDefinition = "bigint")
+    private Long idIncomeCategory;
 
     @Column(name = "description")
     private String description;

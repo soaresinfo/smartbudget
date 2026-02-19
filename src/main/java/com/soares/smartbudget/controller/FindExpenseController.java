@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,8 +28,8 @@ public class FindExpenseController {
     }
 
     @GetMapping(path = "/categories", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<ExpenseResponseModel>> findAllByParentId(@RequestParam("idParent") String idParent){
-        List<Expense> expenses = service.findCategoriesByParentId(UUID.fromString(idParent));
+    public ResponseEntity<List<ExpenseResponseModel>> findAllByParentId(@RequestParam("idParent") Long idParent){
+        List<Expense> expenses = service.findCategoriesByParentId(idParent);
         return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
     }
 

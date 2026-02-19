@@ -1,9 +1,8 @@
 package com.soares.smartbudget.service.core;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
-public record Expense(UUID idCategory,
+public record Expense(Long idCategory,
                       BigDecimal plannedValue,
                       String description,
                       Category category) {

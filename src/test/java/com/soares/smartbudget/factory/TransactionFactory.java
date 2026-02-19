@@ -27,13 +27,13 @@ public class TransactionFactory {
     }
 
     public static Transaction getCore() {
-        return new Transaction(null, BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(), new Category(UUID.randomUUID(), null, null, null), 1, 1 );
+        return new Transaction(null, BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(), new Category(1L, null, null, null), 1, 1 );
     }
 
     public static Transaction getCoreFull() {
-        return new Transaction(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(),
-                new Category(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().material(),
-                        new Category(UUID.randomUUID(), BigDecimal.TEN, FAKER.commerce().material(), null)), 1, 1 );
+        return new Transaction(1L, BigDecimal.TEN, FAKER.commerce().productName(),LocalDate.now(),
+                new Category(1L, BigDecimal.TEN, FAKER.commerce().material(),
+                        new Category(1L, BigDecimal.TEN, FAKER.commerce().material(), null)), 1, 1 );
     }
 
     public static TransactionEntity getEntity() {
@@ -41,7 +41,7 @@ public class TransactionFactory {
                 .description(FAKER.commerce().productName())
                 .value(BigDecimal.TEN)
                 .transactionDate(LocalDate.now())
-                .category(CategoryEntity.builder().idCategory(UUID.randomUUID()).build())
+                .category(CategoryEntity.builder().idCategory(1L).build())
                 .build();
     }
 }

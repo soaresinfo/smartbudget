@@ -9,8 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
@@ -59,6 +57,6 @@ public class SaveTransactionServiceTest {
     }
 
     private Transaction getNewCore(Transaction core){
-        return new Transaction(UUID.randomUUID(), core.value(), core.description(), core.transactionDate(), core.category(), core.installmentNumber(), core.installmentTotal());
+        return new Transaction(1L, core.value(), core.description(), core.transactionDate(), core.category(), core.installmentNumber(), core.installmentTotal());
     }
 }

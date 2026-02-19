@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -38,7 +37,7 @@ public class FindExpenseDataProvider implements FindExpenseGateway {
     }
 
     @Override
-    public List<Expense> findCategoriesByParentId(UUID parentId) {
+    public List<Expense> findCategoriesByParentId(Long parentId) {
         log.info("Iniciando busca por subcategorias com parentId {}.", parentId.toString());
         var expenseEntities = repository.findCategoriesByParent(CategoryEntity.builder().idCategory(parentId).build());
         List<Expense> expenseList = StreamSupport

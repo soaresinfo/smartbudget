@@ -5,15 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.type.SqlTypes;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -26,11 +22,9 @@ public class TransactionEntity implements Serializable {
     private static final long serialVersionUID = -1600630752444334445L;
 
     @Id
-    @GeneratedValue
-    @UuidGenerator(style = UuidGenerator.Style.TIME)
-    @JdbcTypeCode(SqlTypes.BINARY)
-    @Column(name = "id_transaction", nullable = false, columnDefinition = "binary(16)")
-    private UUID idTransaction;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_transaction", nullable = false, columnDefinition = "bigint")
+    private Long idTransaction;
 
     @Column(name = "value_transaction", nullable = false, columnDefinition = "decimal(10,2)")
     private BigDecimal value;
@@ -42,7 +36,7 @@ public class TransactionEntity implements Serializable {
     private LocalDate transactionDate;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id_category", referencedColumnName = "id_category", columnDefinition = "binary(16)")
+    @JoinColumn(name = "id_category", referencedColumnName = "id_category", columnDefinition = "bigint")
     private CategoryEntity category;
 
     @Column(name = "installment_number", columnDefinition = "int")

@@ -5,16 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.type.SqlTypes;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -25,11 +21,9 @@ import java.util.UUID;
 public class UserEntity implements UserDetails {
 
     @Id
-    @UuidGenerator(style = UuidGenerator.Style.TIME)
-    @JdbcTypeCode(SqlTypes.BINARY)
-    @GeneratedValue
-    @Column(name = "id", nullable = false, columnDefinition = "binary(16)")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, columnDefinition = "bigint")
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String username;
