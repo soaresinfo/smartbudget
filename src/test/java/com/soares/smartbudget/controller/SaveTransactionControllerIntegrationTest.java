@@ -28,7 +28,7 @@ public class SaveTransactionControllerIntegrationTest extends AbstractIntegratio
         // 1. Arrange (Preparação)
         TransactionRequestModel model = TransactionFactory.getModel();
         // O ID do expense precisa existir no seu data.sql de teste
-        model.setIdExpense("c96adcca-00d5-49da-9261-dcbd0156d064");
+        model.setIdCategory("c96adcca-00d5-49da-9261-dcbd0156d064");
 
         // 2. Act (Ação) & 3. Assert (Verificação)
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/transactions") // Simula o POST

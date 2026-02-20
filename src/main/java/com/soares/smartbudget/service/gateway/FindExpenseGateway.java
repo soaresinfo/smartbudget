@@ -7,4 +7,8 @@ import java.util.List;
 public interface FindExpenseGateway {
 
     List<Expense> findAll();
+
+    List<Expense> findMainCategories();
+
+    List<Expense> findCategoriesByParentId(Long parentId);
 }

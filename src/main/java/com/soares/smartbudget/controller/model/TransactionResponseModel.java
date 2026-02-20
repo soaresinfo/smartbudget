@@ -18,7 +18,10 @@ public class TransactionResponseModel {
     public static final String VALUE = "value";
     public static final String DESCRIPTION = "description";
     public static final String TRANSACTION_DATE = "transaction_date";
-    public static final String EXPENSE = "expense";
+    public static final String CATEGORY = "category";
+    public static final String INSTALLMENT_NUMBER = "installment_number";
+    public static final String INSTALLMENT_TOTAL = "installment_total";
+
 
     @JsonProperty(value = ID_TRANSACTION)
     private String idTransaction;
@@ -32,6 +35,12 @@ public class TransactionResponseModel {
     @JsonProperty(value = TRANSACTION_DATE)
     private String transactionDate;
 
-    @JsonProperty(value = EXPENSE)
-    private ExpenseResponseModel expense;
+    @JsonProperty(value = CATEGORY)
+    private CategoryModel category;
+
+    @JsonProperty(value = INSTALLMENT_NUMBER)
+    private Integer installmentNumber;
+
+    @JsonProperty(value = INSTALLMENT_TOTAL)
+    private Integer installmentTotal;
 }

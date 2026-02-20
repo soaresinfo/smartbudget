@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,6 +24,18 @@ public class FindExpenseController {
     @GetMapping(path = "/expenses", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ExpenseResponseModel>> findAll(){
         List<Expense> expenses = service.findAll();
+        return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
+    }
+
+    @GetMapping(path = "/categories", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ExpenseResponseModel>> findAllByParentId(@RequestParam("idParent") Long idParent){
+        List<Expense> expenses = service.findCategoriesByParentId(idParent);
+        return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
+    }
+
+    @GetMapping(path = "/categories/main", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ExpenseResponseModel>> findMainCategories(){
+        List<Expense> expenses = service.findMainCategories();
         return ResponseEntity.ok(ExpenseMapper.INSTANCE.fromCoreToModel(expenses));
     }
 }

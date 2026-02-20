@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 
 import static com.soares.smartbudget.controller.model.TransactionRequestModel.TRANSACTION_DATE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -86,7 +85,7 @@ public class SaveTransactionControllerTest {
     }
 
     private Transaction buildTransaction(Transaction core){
-        return new Transaction(UUID.randomUUID(), core.value(), core.description(), core.transactionDate(), core.expense());
+        return new Transaction(1L, core.value(), core.description(), core.transactionDate(), core.category(), core.installmentNumber(), core.installmentTotal());
     }
 
     @Test

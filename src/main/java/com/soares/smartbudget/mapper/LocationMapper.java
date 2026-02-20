@@ -6,9 +6,12 @@ import com.soares.smartbudget.service.core.Location;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface LocationMapper {
     LocationMapper INSTANCE = Mappers.getMapper(LocationMapper.class);
     Location fromEntityToCore(LocationEntity entity);
     LocationResponseModel fromCoreToModel(Location core);
+    List<LocationResponseModel> fromCoreToModel(List<Location> core);
 }
