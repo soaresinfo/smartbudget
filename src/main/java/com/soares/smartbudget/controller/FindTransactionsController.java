@@ -35,7 +35,7 @@ public class FindTransactionsController {
         validatorEnd.validate(endDate).isInvalidThrow(BadRequestException.class);
         LocalDate startDt = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
         LocalDate endDt = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
-
-        return ResponseEntity.ok(TransactionMapper.INSTANCE.fromCoreToModel(service.findAllByDate(startDt, endDt)));
+        List<TransactionResponseModel> responseModel = TransactionMapper.INSTANCE.fromCoreToModel(service.findAllByDate(startDt, endDt));
+        return ResponseEntity.ok(responseModel);
     }
 }

@@ -12,8 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.eq;
@@ -33,7 +31,7 @@ public class SaveTransactionDataProviderTest {
         Transaction core = TransactionFactory.getCore();
         TransactionEntity entity = TransactionMapper.INSTANCE.fromCoreToEntity(core);
         TransactionEntity entitySaved = TransactionMapper.INSTANCE.fromCoreToEntity(core);
-        entitySaved.setIdTransaction(UUID.randomUUID());
+        entitySaved.setIdTransaction(1L);
 
         when(repository.save(eq(entity))).thenReturn(entitySaved);
 

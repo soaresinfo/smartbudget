@@ -5,13 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -25,20 +23,19 @@ public class InvestmentEntity implements Serializable {
     private static final long serialVersionUID = 5937794163811749493L;
 
     @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(name = "id_investment", nullable = false, columnDefinition = "binary(16)")
-    private UUID idInvestment;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_investment", nullable = false, columnDefinition = "bigint")
+    private Long idInvestment;
 
-    @Column(name = "id_portfolio", nullable = false, columnDefinition = "binary(16)")
-    private UUID idPortfolio;
+    @Column(name = "id_portfolio", nullable = false, columnDefinition = "varchar(36)")
+    private String idPortfolio;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id_investment_type", referencedColumnName = "id_investment_type", columnDefinition = "binary(16)")
+    @JoinColumn(name = "id_investment_type", referencedColumnName = "id_investment_type", columnDefinition = "bigint")
     private InvestmentTypeEntity investmentType;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id_location", referencedColumnName = "id_location", columnDefinition = "binary(16)")
+    @JoinColumn(name = "id_location", referencedColumnName = "id_location", columnDefinition = "bigint")
     private LocationEntity location;
 
     @Column(name = "balance", nullable = false, columnDefinition = "decimal(10,2)")

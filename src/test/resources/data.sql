@@ -10,7 +10,7 @@ values
 (UUID_TO_BIN('7c6c5e40-7e1f-4b03-8ef3-594a23e2254e'), 0, 'Programa em amigos'),
 (UUID_TO_BIN('3c9d63e6-d94d-4e46-b72a-0ec4fec5d68f'), 0, 'Outros');
 
-INSERT ignore INTO `budget`.`transaction` (`id_transaction`,`value_transaction`, `description`, `transaction_date`, `id_expense`)
+INSERT ignore INTO `budget`.`transaction` (`id_transaction`,`value_transaction`, `description`, `transaction_date`, `id_category`)
 VALUES
  (UUID_TO_BIN(UUID()), '100', 'Hamburger', '2023-07-02', UUID_TO_BIN('5e6c1734-9e11-4eae-ba77-8fb75fce559c')),
  (UUID_TO_BIN(UUID()), '100', 'Sorvete', now(), UUID_TO_BIN('5e6c1734-9e11-4eae-ba77-8fb75fce559c')),
@@ -18,7 +18,7 @@ VALUES
  (UUID_TO_BIN(UUID()), '100', 'Emporio', now(), UUID_TO_BIN('c96adcca-00d5-49da-9261-dcbd0156d064'))
 ;
 -- Inserindo mais transações para o ano de 2025
-INSERT IGNORE INTO `budget`.`transaction` (`id_transaction`,`value_transaction`, `description`, `transaction_date`, `id_expense`)
+INSERT IGNORE INTO `budget`.`transaction` (`id_transaction`,`value_transaction`, `description`, `transaction_date`, `id_category`)
 VALUES
 -- Janeiro 2025
 (UUID_TO_BIN(UUID()), '350.50', 'Compras do mês', '2025-01-10', UUID_TO_BIN('c96adcca-00d5-49da-9261-dcbd0156d064')),
@@ -169,5 +169,70 @@ VALUES
 -- Inserindo um usuário de exemplo (senha é 'password')
 INSERT IGNORE INTO `budget`.`users` (`id`, `username`, `password`, `role`)
 VALUES
-(UUID_TO_BIN(UUID()), 'admin', '$2b$12$Ier2fV7FHdnW6DkhsN4EKuAHByZSOXOsgn/SxzNrF3GR2U.SLLB5y', 'ADMIN'),
-(UUID_TO_BIN(UUID()), 'user', '$2b$12$Ier2fV7FHdnW6DkhsN4EKuAHByZSOXOsgn/SxzNrF3GR2U.SLLB5y', 'USER');
+(UUID_TO_BIN(UUID_V7()), 'admin', '$2b$12$Ier2fV7FHdnW6DkhsN4EKuAHByZSOXOsgn/SxzNrF3GR2U.SLLB5y', 'ADMIN'),
+(UUID_TO_BIN(UUID_V7()), 'user', '$2b$12$Ier2fV7FHdnW6DkhsN4EKuAHByZSOXOsgn/SxzNrF3GR2U.SLLB5y', 'USER');
+
+/*
+insert ignore into budget.category (id_category, planned_value, description)
+values
+(HEX('704468e1-019b-ec63-b10d-b9f0148fdddb'),         0.00,'Habitação / Moradia'),
+(HEX('716468e1-019b-ec63-8e91-c391d2e89632'),         0.00,'Educação'),
+(HEX('728068e1-019b-ec63-b1a2-e8408a919a85'),         0.00,'Vestuário e Cuidados Pessoais'),
+(HEX('73c068e1-019b-ec63-bcac-5b057df9a183'),         0.00,'Dívidas e Financeiro'),
+(HEX('744c68e0-019b-ec63-b92a-82a7a444ab21'),         0.00,'Alimentação'),
+(HEX('74e068e1-019b-ec63-9773-f188a45da0e0'),         0.00,'Impostos e Taxas'),
+(HEX('760068e1-019b-ec63-97cb-b39107ce53cd'),         0.00,'Poupança e Investimentos'),
+(HEX('772068e1-019b-ec63-bdce-333189191ea6'),         0.00,'Outros'),
+(HEX('78ec68e0-019b-ec63-9c30-bac76de7348e'),         0.00,'Entretenimento'),
+(HEX('7c5068e0-019b-ec63-bcd8-b288d803295f'),         0.00,'Transporte'),
+(HEX('7d9068e0-019b-ec63-9773-91fd21193a77'),         0.00,'Saúde'),
+(HEX('7ebc68e0-019b-ec63-bac8-7ca850100b17'),         0.00,'Contas e Serviços Básicos');
+
+
+insert ignore into budget.category (parent_id_category, id_category, planned_value, description)
+values
+(HEX('704468e1-019b-ec63-b10d-b9f0148fdddb'),hex(uuid_v7()), 0, 'Aluguel / Prestação do financiamento imobiliário'),
+(HEX('704468e1-019b-ec63-b10d-b9f0148fdddb'),hex(uuid_v7()), 0, 'Condomínio'),
+(HEX('704468e1-019b-ec63-b10d-b9f0148fdddb'),hex(uuid_v7()), 0, 'Manutenção e reparos (encanador, eletricista, pintura etc.)'),
+(HEX('744c68e0-019b-ec63-b92a-82a7a444ab21'),hex(uuid_v7()), 0, 'Supermercado / Feira'),
+(HEX('744c68e0-019b-ec63-b92a-82a7a444ab21'),hex(uuid_v7()), 0, 'Delivery / Restaurantes / Fastfood'),
+(HEX('744c68e0-019b-ec63-b92a-82a7a444ab21'),hex(uuid_v7()), 0, 'Padaria'),
+(HEX('7c5068e0-019b-ec63-bcd8-b288d803295f'),hex(uuid_v7()), 0, 'Combustível'),
+(HEX('7c5068e0-019b-ec63-bcd8-b288d803295f'),hex(uuid_v7()), 0, 'Manutenção e peças do carro'),
+(HEX('7c5068e0-019b-ec63-bcd8-b288d803295f'),hex(uuid_v7()), 0, 'Estacionamento / Pedágio'),
+(HEX('7c5068e0-019b-ec63-bcd8-b288d803295f'),hex(uuid_v7()), 0, 'Transporte público (ônibus, metrô, Uber/99, etc.)'),
+(HEX('7c5068e0-019b-ec63-bcd8-b288d803295f'),hex(uuid_v7()), 0, 'IPVA / Licenciamento / Seguro auto'),
+(HEX('7ebc68e0-019b-ec63-bac8-7ca850100b17'),hex(uuid_v7()), 0, 'Energia elétrica'),
+(HEX('7ebc68e0-019b-ec63-bac8-7ca850100b17'),hex(uuid_v7()), 0, 'Internet / Wi-Fi'),
+(HEX('7ebc68e0-019b-ec63-bac8-7ca850100b17'),hex(uuid_v7()), 0, 'Água / Esgoto'),
+(HEX('7ebc68e0-019b-ec63-bac8-7ca850100b17'),hex(uuid_v7()), 0, 'Telefone fixo / Celular / Planos de dados'),
+(HEX('7d9068e0-019b-ec63-9773-91fd21193a77'),hex(uuid_v7()), 0, 'Plano de saúde / Convênio médico'),
+(HEX('7d9068e0-019b-ec63-9773-91fd21193a77'),hex(uuid_v7()), 0, 'Consultas, exames e dentista'),
+(HEX('7d9068e0-019b-ec63-9773-91fd21193a77'),hex(uuid_v7()), 0, 'Medicamentos / Farmácia'),
+(HEX('7d9068e0-019b-ec63-9773-91fd21193a77'),hex(uuid_v7()), 0, 'Academia / Terapias / Fisioterapia'),
+(HEX('716468e1-019b-ec63-8e91-c391d2e89632'),hex(uuid_v7()), 0, 'Mensalidade escola / faculdade / cursinho'),
+(HEX('716468e1-019b-ec63-8e91-c391d2e89632'),hex(uuid_v7()), 0, 'Material escolar / Uniforme'),
+(HEX('716468e1-019b-ec63-8e91-c391d2e89632'),hex(uuid_v7()), 0, 'Cursos extras / Idiomas / Reforço'),
+(HEX('716468e1-019b-ec63-8e91-c391d2e89632'),hex(uuid_v7()), 0, 'Creche / Berçário'),
+(HEX('78ec68e0-019b-ec63-9c30-bac76de7348e'),hex(uuid_v7()), 0, 'Cinema / Teatro / Shows'),
+(HEX('78ec68e0-019b-ec63-9c30-bac76de7348e'),hex(uuid_v7()), 0, 'Passeios / Viagens / Turismo'),
+(HEX('78ec68e0-019b-ec63-9c30-bac76de7348e'),hex(uuid_v7()), 0, 'Streaming / Jogos / Assinaturas digitais'),
+(HEX('78ec68e0-019b-ec63-9c30-bac76de7348e'),hex(uuid_v7()), 0, 'Hobbies (livros, música, artesanato etc.)'),
+(HEX('78ec68e0-019b-ec63-9c30-bac76de7348e'),hex(uuid_v7()), 0, 'Clube'),
+(HEX('728068e1-019b-ec63-b1a2-e8408a919a85'),hex(uuid_v7()), 0, 'Roupas / Calçados'),
+(HEX('728068e1-019b-ec63-b1a2-e8408a919a85'),hex(uuid_v7()), 0, 'Perfumes / Cosméticos'),
+(HEX('728068e1-019b-ec63-b1a2-e8408a919a85'),hex(uuid_v7()), 0, 'Cabeleireiro / Manicure / Estética'),
+(HEX('74e068e1-019b-ec63-9773-f188a45da0e0'),hex(uuid_v7()), 0, 'IRPF (se pago em cota única ou carnê-leão)'),
+(HEX('74e068e1-019b-ec63-9773-f188a45da0e0'),hex(uuid_v7()), 0, 'IPTU / ITR / Taxas do imóvel'),
+(HEX('74e068e1-019b-ec63-9773-f188a45da0e0'),hex(uuid_v7()), 0, 'Outros impostos (MEI, etc.)'),
+(HEX('760068e1-019b-ec63-97cb-b39107ce53cd'),hex(uuid_v7()), 0, 'Reserva de emergência'),
+(HEX('760068e1-019b-ec63-97cb-b39107ce53cd'),hex(uuid_v7()), 0, 'Poupança / Tesouro / CDB / Fundos'),
+(HEX('760068e1-019b-ec63-97cb-b39107ce53cd'),hex(uuid_v7()), 0, 'Aposentadoria / Previdência privada'),
+(HEX('760068e1-019b-ec63-97cb-b39107ce53cd'),hex(uuid_v7()), 0, 'Aporte em investimentos'),
+(HEX('760068e1-019b-ec63-97cb-b39107ce53cd'),hex(uuid_v7()), 0, 'Ações'),
+(HEX('772068e1-019b-ec63-bdce-333189191ea6'),hex(uuid_v7()), 0, 'Presentes / Aniversários / Datas comemorativas'),
+(HEX('772068e1-019b-ec63-bdce-333189191ea6'),hex(uuid_v7()), 0, 'Doações / Igreja / ONGs'),
+(HEX('772068e1-019b-ec63-bdce-333189191ea6'),hex(uuid_v7()), 0, 'Taxas bancárias / Manutenção de conta'),
+(HEX('772068e1-019b-ec63-bdce-333189191ea6'),hex(uuid_v7()), 0, 'Gastos não classificados');
+
+*/

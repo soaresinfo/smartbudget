@@ -20,35 +20,35 @@ public class InvestmentRequestValidator extends AbstractValidator<InvestmentRequ
     public static final String MSG_NULO_OU_VAZIO = "O campo '%s' não pode ser nulo ou vazio";
     public static final String MSG_NUMERIC = "O campo '%s' precisa ser numérico";
     public static final String MSG_DATE_FORMAT = "O campo '%s' precisa estar no formato 'yyyy-MM-dd'";
-    public static final String MSG_UUID_FORMAT = "O campo '%s' precisa ser um UUID válido";
+    public static final String MSG_ID_FORMAT = "O campo '%s' precisa ser um ID válido";
 
     @Override
     public void rules() {
         // Validação para ID_INVESTMENT (apenas se presente, para atualizações)
         ruleFor(InvestmentRequestModel::getIdInvestment)
-                .must(this::isValidUUID)
+                .must(id -> StringPredicate.isNumber().test(id))
                 .when(not(stringEmptyOrNull()))
                 .withAttempedValue(InvestmentRequestModel::getIdInvestment)
                 .withFieldName(ID_INVESTMENT)
-                .withMessage(String.format(MSG_UUID_FORMAT, ID_INVESTMENT));
+                .withMessage(String.format(MSG_ID_FORMAT, ID_INVESTMENT));
 
         // Validação para ID_INVESTMENT_TYPE
         ruleFor(InvestmentRequestModel::getIdInvestmentType)
                 .must(not(stringEmptyOrNull()))
                 .withFieldName(ID_INVESTMENT_TYPE)
                 .withMessage(String.format(MSG_NULO_OU_VAZIO, ID_INVESTMENT_TYPE))
-                .must(this::isValidUUID)
+                .must(id -> StringPredicate.isNumber().test(id))
                 .withFieldName(ID_INVESTMENT_TYPE)
-                .withMessage(String.format(MSG_UUID_FORMAT, ID_INVESTMENT_TYPE));
+                .withMessage(String.format(MSG_ID_FORMAT, ID_INVESTMENT_TYPE));
 
         // Validação para ID_LOCATION
         ruleFor(InvestmentRequestModel::getIdLocation)
                 .must(not(stringEmptyOrNull()))
                 .withFieldName(ID_LOCATION)
                 .withMessage(String.format(MSG_NULO_OU_VAZIO, ID_LOCATION))
-                .must(this::isValidUUID)
+                .must(id -> StringPredicate.isNumber().test(id))
                 .withFieldName(ID_LOCATION)
-                .withMessage(String.format(MSG_UUID_FORMAT, ID_LOCATION));
+                .withMessage(String.format(MSG_ID_FORMAT, ID_LOCATION));
 
         // Validação para BALANCE
         ruleFor(InvestmentRequestModel::getBalance)

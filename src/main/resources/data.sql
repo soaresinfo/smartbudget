@@ -10,21 +10,17 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema budget
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema budget
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `budget` DEFAULT CHARACTER SET utf8 ;
 USE `budget` ;
 
 -- -----------------------------------------------------
--- Table `budget`.`expense`
+-- Table `budget`.`category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `budget`.`expense` (
-  `id_expense` BINARY(16) NOT NULL,
+CREATE TABLE IF NOT EXISTS `budget`.`category` (
+  `id_category` BIGINT NOT NULL AUTO_INCREMENT,
   `planned_value` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id_expense`))
+  PRIMARY KEY (`id_category`))
 ENGINE = InnoDB;
 
 
@@ -32,16 +28,16 @@ ENGINE = InnoDB;
 -- Table `budget`.`transaction`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`transaction` (
-  `id_transaction` BINARY(16) NOT NULL,
+  `id_transaction` BIGINT NOT NULL AUTO_INCREMENT,
   `value_transaction` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(100) NULL,
   `transaction_date` DATE NOT NULL,
-  `id_expense` BINARY(16) NOT NULL,
+  `id_category` BIGINT NOT NULL,
   PRIMARY KEY (`id_transaction`),
-  INDEX `fk_id_expense_96897657_idx` (`id_expense` ASC) VISIBLE,
-  CONSTRAINT `fk_id_expense_96897657`
-    FOREIGN KEY (`id_expense`)
-    REFERENCES `budget`.`expense` (`id_expense`)
+  INDEX `fk_id_category_96897657_idx` (`id_category` ASC) VISIBLE,
+  CONSTRAINT `fk_id_category_96897657`
+    FOREIGN KEY (`id_category`)
+    REFERENCES `budget`.`category` (`id_category`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -50,7 +46,7 @@ ENGINE = InnoDB;
 -- Table `budget`.`investment_type`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`investment_type` (
-  `id_investment_type` BINARY(16) NOT NULL,
+  `id_investment_type` BIGINT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id_investment_type`))
 ENGINE = InnoDB;
@@ -60,7 +56,7 @@ ENGINE = InnoDB;
 -- Table `budget`.`location`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`location` (
-  `id_location` BINARY(16) NOT NULL,
+  `id_location` BIGINT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id_location`))
 ENGINE = InnoDB;
@@ -69,10 +65,10 @@ ENGINE = InnoDB;
 -- Table `budget`.`investment`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`investment` (
-  `id_investment` BINARY(16) NOT NULL,
-  `id_portfolio` BINARY(16) NOT NULL,
-  `id_investment_type` BINARY(16) NOT NULL,
-  `id_location` BINARY(16) NOT NULL,
+  `id_investment` BIGINT NOT NULL AUTO_INCREMENT,
+  `id_portfolio` VARCHAR(36) NOT NULL,
+  `id_investment_type` BIGINT NOT NULL,
+  `id_location` BIGINT NOT NULL,
   `balance` DECIMAL(10,2) NOT NULL,
   `month_revenue` DECIMAL(10,2) NOT NULL,
   `last_update_date` DATE NOT NULL,
@@ -97,7 +93,7 @@ ENGINE = InnoDB;
 -- Table `budget`.`income_category`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`income_category` (
-  `id_income_category` BINARY(16) NOT NULL,
+  `id_income_category` BIGINT NOT NULL AUTO_INCREMENT,
   `description` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_income_category`))
 ENGINE = InnoDB;
@@ -107,11 +103,11 @@ ENGINE = InnoDB;
 -- Table `budget`.`income`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`income` (
-  `id_income` BINARY(16) NOT NULL,
+  `id_income` BIGINT NOT NULL AUTO_INCREMENT,
   `value` DECIMAL(10,2) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
   `income_date` DATE NOT NULL,
-  `id_income_category` BINARY(16) NOT NULL,
+  `id_income_category` BIGINT NOT NULL,
   PRIMARY KEY (`id_income`),
   INDEX `fk_id_income_category_6878923_idx` (`id_income_category` ASC) VISIBLE,
   CONSTRAINT `fk_id_income_category_6878923`
@@ -125,7 +121,7 @@ ENGINE = InnoDB;
 -- Table `budget`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `budget`.`users` (
-  `id` BINARY(16) NOT NULL,
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `role` VARCHAR(255) NULL,

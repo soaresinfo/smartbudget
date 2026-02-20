@@ -5,13 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -24,10 +22,9 @@ public class TransactionEntity implements Serializable {
     private static final long serialVersionUID = -1600630752444334445L;
 
     @Id
-    @GeneratedValue
-    @UuidGenerator
-    @Column(name = "id_transaction", nullable = false, columnDefinition = "binary(16)")
-    private UUID idTransaction;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_transaction", nullable = false, columnDefinition = "bigint")
+    private Long idTransaction;
 
     @Column(name = "value_transaction", nullable = false, columnDefinition = "decimal(10,2)")
     private BigDecimal value;
@@ -39,6 +36,12 @@ public class TransactionEntity implements Serializable {
     private LocalDate transactionDate;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id_expense", referencedColumnName = "id_expense", columnDefinition = "binary(16)")
-    private ExpenseEntity expense;
+    @JoinColumn(name = "id_category", referencedColumnName = "id_category", columnDefinition = "bigint")
+    private CategoryEntity category;
+
+    @Column(name = "installment_number", columnDefinition = "int")
+    private Integer installmentNumber;
+
+    @Column(name = "installment_total", columnDefinition = "int")
+    private Integer installmentTotal;
 }
