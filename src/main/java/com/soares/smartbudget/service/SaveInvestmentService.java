@@ -40,7 +40,7 @@ public class SaveInvestmentService {
         LocalDate today = LocalDate.now();
         LocalDate lastUpdate = investment.lastUpdateDate();
 
-        Optional<Investment> investmentPreviousMonth = findGateway.findInvestmentByPortfolioAndPreviousMonth(investment);
+        Optional<Investment> investmentPreviousMonth = findGateway.findInvestmentByPortfolioAndPreviousMonth(investment.idPortfolio(), today);
         BigDecimal monthRevenue = investment.balance().subtract(investmentPreviousMonth.orElse(investment).balance());
 
         // CONDIÇÃO PRINCIPAL: O mês (e ano) atual é posterior ao do último registro?

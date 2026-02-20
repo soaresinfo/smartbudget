@@ -30,7 +30,6 @@ public class FindInvestmentsDataProvider implements FindInvestmentsGateway {
         String yearSearched = startDate.getYear() + "";
         log.info("Starting to find all investments for month {} year {}.", monthSearched, yearSearched);
         try {
-            log.debug("Searching for investments with last_update_date between {} and {}", startDate, endDate);
             List<InvestmentEntity> listInvestmentEntity = investmentRepository.findAllByLastUpdateDateBetween(startDate, endDate);
 
             if (listInvestmentEntity.isEmpty()) {
@@ -49,18 +48,17 @@ public class FindInvestmentsDataProvider implements FindInvestmentsGateway {
     }
 
     @Override
-    public Optional<Investment> findInvestmentByPortfolioAndPreviousMonth(Investment investment) {
-        LocalDate previousMonthStart = investment.lastUpdateDate().minusMonths(1).withDayOfMonth(1);
+    public Optional<Investment> findInvestmentByPortfolioAndPreviousMonth(String idPortfolio, LocalDate searchDate) {
+        LocalDate previousMonthStart = searchDate.minusMonths(1).withDayOfMonth(1);
         LocalDate previousMonthEnd = previousMonthStart.withDayOfMonth(previousMonthStart.lengthOfMonth());
         String monthSearched = previousMonthStart.getMonth().name();
         String yearSearched = previousMonthStart.getYear() + "";
-        log.info("Starting to find all investments for month {} year {}.", monthSearched, yearSearched);
+        log.info("Starting to find investments by portfolio {} for month {} year {}.",idPortfolio, monthSearched, yearSearched);
         try {
-            log.debug("Searching for lat investment for the month {}", monthSearched);
-            List<InvestmentEntity> listInvestmentEntity = investmentRepository.findAllByIdPortfolioAndLastUpdateDateBetween(investment.idPortfolio(),previousMonthStart, previousMonthEnd);
+            List<InvestmentEntity> listInvestmentEntity = investmentRepository.findAllByIdPortfolioAndLastUpdateDateBetween(idPortfolio,previousMonthStart, previousMonthEnd);
 
             if (listInvestmentEntity.isEmpty()) {
-                log.info("No investments found for month {}.", monthSearched);
+                log.info("No investments found.");
                 return Optional.empty();
             }
 
@@ -68,7 +66,7 @@ public class FindInvestmentsDataProvider implements FindInvestmentsGateway {
                     .max(Comparator.comparing(InvestmentEntity::getLastUpdateDate))
                     .map(investmentMapper::fromEntityToCore);
         } catch (Exception e) {
-            log.error("Error finding investments for month {}.", monthSearched, e);
+            log.error("Error finding investments by portfolio {} for month {} year {}.",idPortfolio, monthSearched, yearSearched, e);
             return Optional.empty();
         }
     }
