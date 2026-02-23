@@ -24,7 +24,7 @@ public class TransactionResponseModel {
 
 
     @JsonProperty(value = ID_TRANSACTION)
-    private String idTransaction;
+    private Long idTransaction;
 
     @JsonProperty(value = VALUE)
     private String value;
