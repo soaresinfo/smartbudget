@@ -21,6 +21,7 @@ public class InvestmentResponseModel {
     public static final String MONTH_REVENUE = "month_revenue";
     public static final String LOCATION = "location";
     public static final String LAST_UPDATE_DATE = "last_update_date";
+    private static final String CONTRIBUTION = "contribution";
 
     @JsonProperty(value = ID_INVESTMENT)
     private String idInvestment;
@@ -39,6 +40,9 @@ public class InvestmentResponseModel {
 
     @JsonProperty(value = MONTH_REVENUE)
     private String monthRevenue;
+
+    @JsonProperty(value = CONTRIBUTION)
+    private String contribution;
 
     @JsonProperty(value = LAST_UPDATE_DATE)
     private String lastUpdateDate;

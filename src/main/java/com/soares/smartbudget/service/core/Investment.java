@@ -10,6 +10,7 @@ public record Investment(
         Location location,
         BigDecimal balance,
         BigDecimal monthRevenue,
+        BigDecimal contribution,
         LocalDate lastUpdateDate
 ) {
 }

@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `budget`.`investment` (
   `id_location` BIGINT NOT NULL,
   `balance` DECIMAL(10,2) NOT NULL,
   `month_revenue` DECIMAL(10,2) NOT NULL,
+  `contribution` DECIMAL(10,2) ,
   `last_update_date` DATE NOT NULL,
   PRIMARY KEY (`id_investment`),
   INDEX `fk_investment_type_idx` (`id_investment_type` ASC) VISIBLE,

@@ -44,6 +44,9 @@ public class InvestmentEntity implements Serializable {
     @Column(name = "month_revenue", nullable = false, columnDefinition = "decimal(10,2)")
     private BigDecimal monthRevenue;
 
+    @Column(name = "contribution", columnDefinition = "decimal(10,2)")
+    private BigDecimal contribution;
+
     @Column(name = "last_update_date", nullable = false, columnDefinition = "date")
     private LocalDate lastUpdateDate;
 }

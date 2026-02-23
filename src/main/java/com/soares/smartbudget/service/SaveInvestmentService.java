@@ -32,6 +32,7 @@ public class SaveInvestmentService {
                     investment.location(),
                     investment.balance(),
                     investment.monthRevenue(),
+                    investment.contribution(),
                     investment.lastUpdateDate()
             );
             return saveGateway.save(newPosition);
@@ -52,8 +53,9 @@ public class SaveInvestmentService {
                     investment.idPortfolio(),
                     investment.investmentType(),
                     investment.location(),
-                    investment.balance(),
+                    investment.balance().add(investment.contribution()),
                     monthRevenue,
+                    BigDecimal.ZERO,
                     today
             );
             return saveGateway.save(newSnapshot);
@@ -67,6 +69,7 @@ public class SaveInvestmentService {
                     investment.location(),
                     investment.balance(),
                     monthRevenue,
+                    investment.contribution(),
                     investment.lastUpdateDate()
             );
             return saveGateway.save(updatedSnapshot);
