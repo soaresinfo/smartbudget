@@ -70,7 +70,7 @@ public class SaveInvestmentService {
                     investment.balance(),
                     monthRevenue,
                     investment.contribution(),
-                    investment.lastUpdateDate()
+                    today
             );
             return saveGateway.save(updatedSnapshot);
         }
