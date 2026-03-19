@@ -11,6 +11,7 @@ public record Investment(
         BigDecimal balance,
         BigDecimal monthRevenue,
         BigDecimal contribution,
+        BigDecimal withdraw,
         LocalDate lastUpdateDate
 ) {
 }

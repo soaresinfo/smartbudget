@@ -17,12 +17,12 @@ import java.util.UUID;
 public class SaveInvestmentService {
 
     private final SaveInvestmentGateway saveGateway;
-
     private final FindInvestmentsGateway findGateway;
 
     @Transactional
     public Investment save(Investment investment) {
 
+        // 1. Criação de novo investimento
         if (investment.idInvestment() == null) {
             UUID newPortfolioId = UUID.randomUUID();
             Investment newPosition = new Investment(
@@ -31,45 +31,74 @@ public class SaveInvestmentService {
                     investment.investmentType(),
                     investment.location(),
                     investment.balance(),
-                    investment.monthRevenue(),
+                    BigDecimal.ZERO, // Sem rendimento na criação
                     investment.contribution(),
+                    investment.withdraw(),
                     investment.lastUpdateDate()
             );
             return saveGateway.save(newPosition);
         }
 
+        // 2. Lógica de Atualização
         LocalDate today = LocalDate.now();
         LocalDate lastUpdate = investment.lastUpdateDate();
 
+        // Busca o registro do mês anterior para servir de base de cálculo
         Optional<Investment> investmentPreviousMonth = findGateway.findInvestmentByPortfolioAndPreviousMonth(investment.idPortfolio(), today);
-        BigDecimal monthRevenue = investment.balance().subtract(investmentPreviousMonth.orElse(investment).balance());
+        Investment previousRecord = investmentPreviousMonth.orElse(investment);
 
-        // CONDIÇÃO PRINCIPAL: O mês (e ano) atual é posterior ao do último registro?
-        if (today.getYear() > lastUpdate.getYear() || (today.getYear() == lastUpdate.getYear() && today.getMonthValue() > lastUpdate.getMonthValue())) {
-            // SIM: Criamos um NOVO registro (snapshot) para o mês atual.
-            // Mantemos o portfolioId, mas o idInvestment será novo.
+        // Verifica se é uma virada de mês
+        boolean isNewMonth = today.getYear() > lastUpdate.getYear() ||
+                (today.getYear() == lastUpdate.getYear() && today.getMonthValue() > lastUpdate.getMonthValue());
+
+        if (isNewMonth) {
+            // CENÁRIO: Virada de Mês -> Novo Snapshot
+            // Aqui o rendimento é calculado baseado na diferença entre o fechamento do mês anterior e o saldo atual
+            BigDecimal monthRevenue = investment.balance()
+                    .subtract(previousRecord.balance())
+                    .subtract(investment.contribution() != null ? investment.contribution() : BigDecimal.ZERO)
+                    .add(investment.withdraw() != null ? investment.withdraw() : BigDecimal.ZERO);
+
             Investment newSnapshot = new Investment(
                     null,
-                    investment.idPortfolio(),
-                    investment.investmentType(),
-                    investment.location(),
-                    investment.balance().add(investment.contribution()),
-                    monthRevenue,
-                    BigDecimal.ZERO,
-                    today
-            );
-            return saveGateway.save(newSnapshot);
-        } else {
-            // NÃO: A atualização é para o mesmo mês. Apenas atualizamos o registro existente.
-            // O ID do registro e o ID do portfólio são mantidos.
-            Investment updatedSnapshot = new Investment(
-                    investment.idInvestment(),
                     investment.idPortfolio(),
                     investment.investmentType(),
                     investment.location(),
                     investment.balance(),
                     monthRevenue,
                     investment.contribution(),
+                    investment.withdraw(),
+                    today
+            );
+            return saveGateway.save(newSnapshot);
+
+        } else {
+            // CENÁRIO: Atualização no Mesmo Mês -> Atualiza Registro Existente
+
+            BigDecimal currentRevenue;
+
+            if (investmentPreviousMonth.isEmpty()) {
+                // Se não tem mês anterior, é o mês de criação. Rendimento deve ser ZERO.
+                // (Ou calculado se você considerar lucro intraday no primeiro mês, mas o padrão é 0)
+                currentRevenue = BigDecimal.ZERO;
+            } else {
+                // Fórmula: Saldo Atual - Saldo Mês Anterior - Aportes Atuais + Retiradas Atuais
+                // Isso garante que se você mudar o saldo e o aporte agora, o rendimento se ajusta corretamente.
+                currentRevenue = investment.balance()
+                        .subtract(previousRecord.balance())
+                        .subtract(investment.contribution() != null ? investment.contribution() : BigDecimal.ZERO)
+                        .add(investment.withdraw() != null ? investment.withdraw() : BigDecimal.ZERO);
+            }
+
+            Investment updatedSnapshot = new Investment(
+                    investment.idInvestment(),
+                    investment.idPortfolio(),
+                    investment.investmentType(),
+                    investment.location(),
+                    investment.balance(),
+                    currentRevenue, // Rendimento recalculado
+                    investment.contribution(),
+                    investment.withdraw(),
                     today
             );
             return saveGateway.save(updatedSnapshot);
