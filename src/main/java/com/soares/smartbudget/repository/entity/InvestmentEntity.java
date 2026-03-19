@@ -47,6 +47,9 @@ public class InvestmentEntity implements Serializable {
     @Column(name = "contribution", columnDefinition = "decimal(10,2)")
     private BigDecimal contribution;
 
+    @Column(name = "withdraw", columnDefinition = "decimal(10,2)")
+    private BigDecimal withdraw;
+
     @Column(name = "last_update_date", nullable = false, columnDefinition = "date")
     private LocalDate lastUpdateDate;
 }
