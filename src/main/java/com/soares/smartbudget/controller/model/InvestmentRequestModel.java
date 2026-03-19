@@ -21,7 +21,8 @@ public class InvestmentRequestModel {
     public static final String BALANCE = "balance";
     public static final String MONTH_REVENUE = "month_revenue";
     public static final String LAST_UPDATE_DATE = "last_update_date";
-    private static final String CONTRIBUTION = "contribution";
+    public static final String CONTRIBUTION = "contribution";
+    public static final String WITHDRAW = "withdraw";
 
     @JsonProperty(value = ID_INVESTMENT)
     private String idInvestment;
@@ -40,9 +41,12 @@ public class InvestmentRequestModel {
 
     @JsonProperty(value = MONTH_REVENUE)
     private String monthRevenue;
-    
+
     @JsonProperty(value = CONTRIBUTION)
     private String contribution;
+
+    @JsonProperty(value = WITHDRAW)
+    private String withdraw;
 
     @JsonProperty(value = LAST_UPDATE_DATE)
     private String lastUpdateDate;
