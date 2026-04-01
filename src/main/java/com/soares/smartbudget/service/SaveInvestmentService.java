@@ -54,41 +54,13 @@ public class SaveInvestmentService {
         if (isNewMonth) {
             // CENÁRIO: Virada de Mês -> Novo Snapshot
             // Aqui o rendimento é calculado baseado na diferença entre o fechamento do mês anterior e o saldo atual
-            BigDecimal monthRevenue = investment.balance()
-                    .subtract(previousRecord.balance())
-                    .subtract(investment.contribution() != null ? investment.contribution() : BigDecimal.ZERO)
-                    .add(investment.withdraw() != null ? investment.withdraw() : BigDecimal.ZERO);
-
-            Investment newSnapshot = new Investment(
-                    null,
-                    investment.idPortfolio(),
-                    investment.investmentType(),
-                    investment.location(),
-                    investment.balance(),
-                    monthRevenue,
-                    investment.contribution(),
-                    investment.withdraw(),
-                    today
-            );
+            Investment newSnapshot = getNewSnapshot(investment, previousRecord, today);
             return saveGateway.save(newSnapshot);
 
         } else {
             // CENÁRIO: Atualização no Mesmo Mês -> Atualiza Registro Existente
 
-            BigDecimal currentRevenue;
-
-            if (investmentPreviousMonth.isEmpty()) {
-                // Se não tem mês anterior, é o mês de criação. Rendimento deve ser ZERO.
-                // (Ou calculado se você considerar lucro intraday no primeiro mês, mas o padrão é 0)
-                currentRevenue = BigDecimal.ZERO;
-            } else {
-                // Fórmula: Saldo Atual - Saldo Mês Anterior - Aportes Atuais + Retiradas Atuais
-                // Isso garante que se você mudar o saldo e o aporte agora, o rendimento se ajusta corretamente.
-                currentRevenue = investment.balance()
-                        .subtract(previousRecord.balance())
-                        .subtract(investment.contribution() != null ? investment.contribution() : BigDecimal.ZERO)
-                        .add(investment.withdraw() != null ? investment.withdraw() : BigDecimal.ZERO);
-            }
+            BigDecimal currentRevenue = getCurrentRevenue(investment, investmentPreviousMonth, previousRecord);
 
             Investment updatedSnapshot = new Investment(
                     investment.idInvestment(),
@@ -103,5 +75,40 @@ public class SaveInvestmentService {
             );
             return saveGateway.save(updatedSnapshot);
         }
+    }
+
+    private static BigDecimal getCurrentRevenue(Investment investment, Optional<Investment> investmentPreviousMonth, Investment previousRecord) {
+        BigDecimal currentRevenue;
+
+        if (investmentPreviousMonth.isEmpty()) {
+            // Se não tem mês anterior, é o mês de criação. Rendimento deve ser ZERO.
+            // (Ou calculado se você considerar lucro intraday no primeiro mês, mas o padrão é 0)
+            currentRevenue = BigDecimal.ZERO;
+        } else {
+            // Fórmula: Saldo Atual - Saldo Mês Anterior - Aportes Atuais + Retiradas Atuais
+            // Isso garante que se você mudar o saldo e o aporte agora, o rendimento se ajusta corretamente.
+            currentRevenue = investment.balance()
+                    .subtract(previousRecord.balance())
+                    .subtract(investment.contribution() != null ? investment.contribution() : BigDecimal.ZERO)
+                    .add(investment.withdraw() != null ? investment.withdraw() : BigDecimal.ZERO);
+        }
+        return currentRevenue;
+    }
+
+    private static Investment getNewSnapshot(Investment investment, Investment previousRecord, LocalDate today) {
+        BigDecimal monthRevenue = investment.balance()
+                .subtract(previousRecord.balance());
+
+        return new Investment(
+                null,
+                investment.idPortfolio(),
+                investment.investmentType(),
+                investment.location(),
+                investment.balance(),
+                monthRevenue,
+                BigDecimal.ZERO,
+                BigDecimal.ZERO,
+                today
+        );
     }
 }
