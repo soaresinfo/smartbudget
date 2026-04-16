@@ -10,8 +10,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Permite CORS para todos os endpoints sob /api/
-                .allowedOrigins("http://localhost:3000", "http://192.168.12.116:3000", "http://192.168.12.107:3000") // A porta padrão do SvelteKit dev server
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedOrigins("http://localhost:3000",
+                                "http://192.168.12.116:3000",
+                                "http://192.168.12.116:8080",
+                                "http://192.168.12.107:3000")
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
