@@ -4,6 +4,7 @@ import com.soares.smartbudget.service.core.Investment;
 import com.soares.smartbudget.service.gateway.FindInvestmentsGateway;
 import com.soares.smartbudget.service.gateway.SaveInvestmentGateway;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ public class SaveInvestmentService {
     private final FindInvestmentsGateway findGateway;
 
     @Transactional
+    @Async("investmentTaskExecutor")
     public Investment save(Investment investment) {
 
         // 1. Criação de novo investimento
