@@ -1,5 +1,6 @@
 package com.soares.smartbudget.controller.scheduler;
 
+import com.soares.smartbudget.controller.scheduler.config.AsyncConfig;
 import com.soares.smartbudget.service.FindInvestmentsService;
 import com.soares.smartbudget.service.SaveInvestmentService;
 import com.soares.smartbudget.service.core.Investment;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Component
@@ -35,7 +37,7 @@ public class InvestmentScheduler {
 
             lastMonthInvestments.forEach(investment -> {
                 try {
-                    saveInvestment.save(investment);
+                    CompletableFuture.runAsync(() -> saveInvestment.save(investment), new AsyncConfig().investmentTaskExecutor());
                 } catch (Exception e) {
                     log.error("Erro ao processar snapshot para o portfolio: {}", investment.idPortfolio(), e);
                 }
