@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ public class SaveTransactionService {
         //crie um novo objeto transaction com o novo parametro installmentNumber) {
         return new Transaction(
                 transaction.idTransaction(),
-                transaction.installmentTotal().equals(1) ? transaction.value() : transaction.value().divide(new BigDecimal(transaction.installmentTotal())),
+                transaction.installmentTotal().equals(1) ? transaction.value() : transaction.value().divide(new BigDecimal(transaction.installmentTotal()), RoundingMode.HALF_UP),
                 transaction.description(),
                 transactionDate,
                 transaction.category(),
